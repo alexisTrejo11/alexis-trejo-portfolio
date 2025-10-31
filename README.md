@@ -1,10 +1,10 @@
 # Backend Developer Portfolio 🚀
 
-A sophisticated interactive backend portfolio that combines technical documentation with live API exploration. Built with React and designed as a hybrid between framework documentation and developer tools.
+A sophisticated interactive backend portfolio that combines technical documentation with live API exploration. Built with **Angular** and designed as a hybrid between framework documentation and developer tools.
 
 ## 🎯 Concept Overview
 
-This portfolio reimagines the traditional developer portfolio as an interactive technical documentation platform. It merges the aesthetic of framework documentation (Next.js, Tailwind CSS) with the functionality of developer tools (Swagger, Storybook) to showcase backend expertise through live, explorable examples.
+This portfolio reimagines the traditional developer portfolio as an interactive technical documentation platform. It merges the aesthetic of framework documentation (Angular, Material Design) with the functionality of developer tools (Swagger, Storybook) to showcase backend expertise through live, explorable examples.
 
 ## 🏗️ Navigation Structure
 
@@ -63,23 +63,23 @@ This portfolio reimagines the traditional developer portfolio as an interactive 
 ## 🛠️ Technical Stack
 
 ### Frontend
-- **Framework**: React with TypeScript
-- **Build Tool**: Vite
-- **Styling**: Tailwind CSS with custom design system
-- **State Management**: Zustand/Redux Toolkit
-- **API Client**: Axios + React Query
+- **Framework**: Angular 18 with TypeScript
+- **Architecture**: Standalone Components, Signals, Zoneless
+- **Styling**: Angular Material + SCSS with custom design system
+- **State Management**: Services + RxJS
+- **API Client**: HttpClient + Interceptors
 
 ### Backend Integration
-- **Live API Testing**: Integrated fetch/axios with syntax highlighting
-- **Data Visualization**: Chart.js/D3.js for metrics
-- **Code Highlighting**: Prism.js/Shiki
+- **Live API Testing**: Angular HttpClient with interactive examples
+- **Data Visualization**: Chart.js integrated with Angular
+- **Code Highlighting**: Prism.js with custom directives
 - **Diagram Rendering**: Mermaid.js for architecture visuals
 
 ### DevOps & Deployment
 - **Containerization**: Docker
 - **CI/CD**: GitHub Actions
-- **Hosting**: Vercel/Netlify (Frontend) + Railway/Render (Backend demos)
-- **Monitoring**: Custom analytics and performance tracking
+- **Hosting**: Vercel/Netlify (with SSR support)
+- **Performance**: Server-Side Rendering enabled
 
 ## 🚀 Getting Started
 
@@ -88,10 +88,13 @@ This portfolio reimagines the traditional developer portfolio as an interactive 
 npm install
 
 # Start development server
-npm run dev
+ng serve
 
 # Build for production
-npm run build
+ng build
 
-# Preview production build
-npm run preview
+# Build with SSR
+ng build --configuration=production
+
+# Serve SSR version
+ng serve --configuration=production
