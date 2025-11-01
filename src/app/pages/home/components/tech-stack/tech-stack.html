@@ -1,0 +1,66 @@
+<section class="py-20 px-6 bg-white dark:bg-gray-950 border-y border-gray-200 dark:border-gray-800">
+  <div class="max-w-6xl mx-auto">
+    <!-- Section Header -->
+    <div class="text-center mb-16">
+      <h2 class="text-4xl font-bold text-gray-900 dark:text-white mb-4">
+        Tech Stack
+      </h2>
+      <p class="text-lg text-gray-600 dark:text-gray-400">
+        Technologies I work with to build robust systems
+      </p>
+    </div>
+
+    <!-- Category Filters -->
+    <div class="flex flex-wrap justify-center gap-3 mb-12">
+      <button
+        (click)="selectCategory('All')"
+        [class.bg-blue-600]="selectedCategory === 'All'"
+        [class.text-white]="selectedCategory === 'All'"
+        [class.border-gray-300]="selectedCategory !== 'All'"
+        [class.text-gray-700]="selectedCategory !== 'All'"
+        class="px-4 py-2 rounded-full border-2 dark:border-gray-700 dark:text-gray-300 transition-all duration-300 hover:scale-105 font-medium"
+      >
+        All
+      </button>
+      @for (category of categories; track category) {
+        <button
+          (click)="selectCategory(category)"
+          [class.bg-blue-600]="selectedCategory === category"
+          [class.text-white]="selectedCategory === category"
+          [class.border-gray-300]="selectedCategory !== category"
+          [class.text-gray-700]="selectedCategory !== category"
+          class="px-4 py-2 rounded-full border-2 dark:border-gray-700 dark:text-gray-300 transition-all duration-300 hover:scale-105 font-medium"
+        >
+          {{ category }}
+        </button>
+      }
+    </div>
+
+    <!-- Tech Grid -->
+    <div class="grid grid-cols-2 md:grid-cols-4 gap-6">
+      @for (tech of filteredTechnologies; track tech.name) {
+        <div
+          class="group relative p-6 bg-gray-50 dark:bg-gray-900 rounded-xl border border-gray-200 dark:border-gray-800 hover:border-blue-600 dark:hover:border-blue-400 transition-all duration-300 hover:scale-105 hover:shadow-lg"
+        >
+          <!-- Icon -->
+          <div class="text-4xl mb-3" [ngClass]="tech.color">
+            {{ tech.icon }}
+          </div>
+
+          <!-- Tech Name -->
+          <h3 class="text-lg font-semibold text-gray-900 dark:text-white mb-1">
+            {{ tech.name }}
+          </h3>
+
+          <!-- Category Badge -->
+          <span class="inline-block text-xs px-2 py-1 bg-blue-100 dark:bg-blue-900/30 text-blue-600 dark:text-blue-400 rounded-full">
+            {{ tech.category }}
+          </span>
+
+          <!-- Hover Effect -->
+          <div class="absolute inset-0 bg-gradient-to-br from-blue-600/0 to-blue-600/0 group-hover:from-blue-600/5 group-hover:to-purple-600/5 rounded-xl transition-all duration-300"></div>
+        </div>
+      }
+    </div>
+  </div>
+</section>
