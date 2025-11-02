@@ -6,7 +6,6 @@ import { RouterModule } from '@angular/router';
   selector: 'app-featured-projects',
   imports: [RouterModule],
   templateUrl: './featured-projects.html',
-  styleUrl: './featured-projects.scss',
 })
 export class FeaturedProjects {
   // Dummy data for featured projects

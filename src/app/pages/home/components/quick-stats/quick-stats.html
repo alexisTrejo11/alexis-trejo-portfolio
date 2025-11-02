@@ -1,1 +1,19 @@
-<p>quick-stats works!</p>
+<section class="py-20 px-6 bg-gradient-to-br from-blue-600 to-purple-600 dark:to-purple-900">
+  <div class="max-w-6xl mx-auto">
+    <div class="grid grid-cols-2 md:grid-cols-4 gap-8">
+      @for (stat of stats; track $index) {
+      <div
+        class="text-center p-6 bg-white/10 backdrop-blur-sm rounded-xl border border-white/20 hover:bg-white/20 transition-all duration-300"
+      >
+        <div class="text-4xl md:text-5xl font-bold text-white mb-2">
+          {{ stat.value | number : '1.0-1' }}{{ stat.suffix }}
+        </div>
+
+        <div class="text-sm md:text-base text-white/80 font-medium">
+          {{ stat.label }}
+        </div>
+      </div>
+      }
+    </div>
+  </div>
+</section>

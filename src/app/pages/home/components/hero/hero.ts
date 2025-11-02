@@ -6,7 +6,6 @@ import { CommonModule } from '@angular/common';
   standalone: true,
   imports: [CommonModule],
   templateUrl: './hero.html',
-  styleUrls: ['./hero.scss'],
 })
 export class Hero implements OnInit {
   displayText = signal('');

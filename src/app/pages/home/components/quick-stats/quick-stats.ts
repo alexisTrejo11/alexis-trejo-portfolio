@@ -1,11 +1,46 @@
-import { Component } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
+import { Stat } from '../../../../models/models';
+import { CommonModule } from '@angular/common';
 
 @Component({
   selector: 'app-quick-stats',
-  imports: [],
+  imports: [CommonModule],
   templateUrl: './quick-stats.html',
-  styleUrl: './quick-stats.scss',
 })
-export class QuickStats {
+export class QuickStats implements OnInit, OnDestroy {
+  stats: Stat[] = [
+    { label: 'Years Experience', value: 0, suffix: '+', duration: 2000 },
+    { label: 'Projects Delivered', value: 0, suffix: '+', duration: 2500 },
+    { label: 'API Endpoints Built', value: 0, suffix: '+', duration: 3000 },
+    { label: 'System Uptime', value: 0, suffix: '%', duration: 2000 },
+  ];
 
+  private targetValues = [5, 50, 500, 99.9];
+  private intervals: any[] = [];
+
+  ngOnInit() {
+    this.animateStats();
+  }
+
+  ngOnDestroy() {
+    this.intervals.forEach((interval) => clearInterval(interval));
+  }
+
+  private animateStats() {
+    this.stats.forEach((stat, index) => {
+      const target = this.targetValues[index];
+      const increment = target / (stat.duration / 16);
+
+      const interval = setInterval(() => {
+        if (stat.value < target) {
+          stat.value = Math.min(stat.value + increment, target);
+        } else {
+          clearInterval(interval);
+          stat.value = target;
+        }
+      }, 16);
+
+      this.intervals.push(interval);
+    });
+  }
 }

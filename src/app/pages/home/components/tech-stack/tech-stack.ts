@@ -6,7 +6,6 @@ import { CommonModule } from '@angular/common';
   selector: 'app-tech-stack',
   imports: [CommonModule],
   templateUrl: './tech-stack.html',
-  styleUrl: './tech-stack.scss',
 })
 export class TechStack {
   technologies: Technology[] = [
