@@ -1,5 +1,6 @@
-import { Component, OnInit, signal } from '@angular/core';
+import { Component, inject, OnInit, signal } from '@angular/core';
 import { CommonModule } from '@angular/common';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-hero',
@@ -12,6 +13,7 @@ export class Hero implements OnInit {
   private fullText = ' Building scalable backend systems'; // Starts empty to be filled by typing effect
   private typingSpeed = 60;
   private initialDelay = 200;
+  private router = inject(Router);
 
   ngOnInit(): void {
     this.startTypingEffect();
@@ -32,8 +34,8 @@ export class Hero implements OnInit {
     setTimeout(typeCharacter, this.initialDelay);
   }
 
-  scrollToProjects(): void {
-    document.querySelector('#projects')?.scrollIntoView({
+  scrollToProjects() {
+    document.querySelector('#featured-projects')?.scrollIntoView({
       behavior: 'smooth',
     });
   }

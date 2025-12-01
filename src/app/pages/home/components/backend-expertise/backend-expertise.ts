@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { Expertise } from '../../../../models/models';
+import { Expertise } from '../../../../core/models/hero';
 
 @Component({
   selector: 'app-backend-expertise',

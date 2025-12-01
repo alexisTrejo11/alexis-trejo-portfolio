@@ -18,3 +18,16 @@ export interface Stat {
   suffix: string;
   duration: number;
 }
+
+export interface FeatureProject {
+  id: string;
+  title: string;
+  description: string;
+  tags: string[];
+  metrics: {
+    label: string;
+    value: string;
+  }[];
+  image: string;
+  featured: boolean;
+}

@@ -1,0 +1,214 @@
+<div class="min-h-screen bg-white dark:bg-gray-950">
+  <!-- Hero Section -->
+  <section
+    class="bg-gradient-to-br from-gray-50 to-gray-100 dark:from-gray-900 dark:to-gray-800 border-b border-gray-200 dark:border-gray-800"
+  >
+    <div class="max-w-7xl mx-auto px-6 py-16 lg:py-24">
+      <!-- Section Header -->
+      <div class="text-center max-w-3xl mx-auto">
+        <h1 class="text-5xl md:text-6xl font-bold text-gray-900 dark:text-white mb-6">
+          All Projects
+        </h1>
+
+        <p class="text-xl text-gray-600 dark:text-gray-400 mb-8">
+          Explore my complete portfolio of production-ready applications, from microservices to
+          full-stack platforms.
+        </p>
+
+        <!-- Search Bar -->
+        <div class="relative max-w-2xl mx-auto">
+          <input
+            type="text"
+            [(ngModel)]="searchQuery"
+            (ngModelChange)="filterProjects()"
+            placeholder="Search projects by name, technology or description"
+            class="input pl-12"
+          />
+          <svg
+            class="absolute left-4 top-1/2 transform -translate-y-1/2 w-5 h-5 text-gray-400"
+            fill="none"
+            stroke="currentColor"
+            viewBox="0 0 24 24"
+          >
+            <path
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              stroke-width="2"
+              d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"
+            />
+          </svg>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Main Content -->
+  <div class="max-w-7xl mx-auto px-6 py-12 lg:py-16">
+    <!-- Filters Header -->
+    <div class="flex flex-col md:flex-row justify-between items-start md:items-center gap-4 mb-8">
+      <div>
+        <h2 class="text-2xl font-bold text-gray-900 dark:text-white">
+          Projects
+          <span class="text-gray-500 dark:text-gray-400 font-normal ml-2">
+            ({{ getFilteredStats().showing }}/{{ getFilteredStats().total }})
+          </span>
+        </h2>
+      </div>
+
+      <!-- Clear Filters Button -->
+      @if (getActiveFiltersCount() > 0) {
+      <button
+        (click)="clearFilters()"
+        class="inline-flex items-center gap-2 text-sm text-gray-600 dark:text-gray-400 hover:text-gray-900 dark:hover:text-white"
+      >
+        <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path
+            stroke-linecap="round"
+            stroke-linejoin="round"
+            stroke-width="2"
+            d="M6 18L18 6M6 6l12 12"
+          />
+        </svg>
+        Clear all filters ({{ getActiveFiltersCount() }})
+      </button>
+      }
+    </div>
+
+    <!-- Filters Container -->
+    <div class="space-y-8 mb-12">
+      <!-- Category Filter -->
+      <div>
+        <label class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-3">
+          Category
+        </label>
+        <div class="flex flex-wrap gap-3">
+          @for (category of categories; track category.value) {
+          <button
+            (click)="toggleCategoryFilter(category.value)"
+            [class.badge-primary]="selectedCategory === category.value"
+            [class.badge-gray]="selectedCategory !== category.value"
+            class="badge cursor-pointer hover:scale-105 transition-transform"
+          >
+            {{ category.label }}
+          </button>
+          }
+        </div>
+      </div>
+
+      <!-- Status & Tech Filters -->
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+        <!-- Status Filter -->
+        <div>
+          <label class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-3">
+            Status
+          </label>
+          <div class="flex flex-wrap gap-3">
+            @for (filter of statusFilters; track filter.value) {
+            <button
+              (click)="toggleStatusFilter(filter.value)"
+              [class.badge-primary]="selectedStatus === filter.value"
+              [class.badge-gray]="selectedStatus !== filter.value"
+              class="badge cursor-pointer hover:scale-105 transition-transform"
+            >
+              {{ filter.label }}
+            </button>
+            }
+          </div>
+        </div>
+
+        <!-- Technology Filter -->
+        <div>
+          <label class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-3">
+            Technology
+          </label>
+          <div class="flex flex-wrap gap-3">
+            @for (tech of techFilters; track tech.value) {
+            <button
+              (click)="toggleTechFilter(tech.value)"
+              [class.badge-primary]="selectedTech === tech.value"
+              [class.badge-gray]="selectedTech !== tech.value"
+              class="badge cursor-pointer hover:scale-105 transition-transform"
+            >
+              {{ tech.label }}
+            </button>
+            }
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Projects Grid -->
+    @if (loading) {
+    <!-- Loading Skeleton -->
+    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+      @for (i of [1, 2, 3, 4, 5, 6]; track i) {
+      <div class="animate-pulse">
+        <div class="h-48 bg-gray-200 dark:bg-gray-800 rounded-t-xl"></div>
+        <div class="p-6 space-y-4">
+          <div class="h-6 bg-gray-200 dark:bg-gray-800 rounded w-3/4"></div>
+          <div class="h-4 bg-gray-200 dark:bg-gray-800 rounded w-full"></div>
+          <div class="h-4 bg-gray-200 dark:bg-gray-800 rounded w-5/6"></div>
+          <div class="h-10 bg-gray-200 dark:bg-gray-800 rounded mt-4"></div>
+        </div>
+      </div>
+      }
+    </div>
+    } @else if (filteredProjects.length === 0) {
+    <!-- Empty State -->
+    <div class="text-center py-16">
+      <div class="max-w-md mx-auto">
+        <svg
+          class="w-16 h-16 mx-auto text-gray-400 dark:text-gray-600 mb-4"
+          fill="none"
+          stroke="currentColor"
+          viewBox="0 0 24 24"
+        >
+          <path
+            stroke-linecap="round"
+            stroke-linejoin="round"
+            stroke-width="2"
+            d="M9.172 16.172a4 4 0 015.656 0M9 10h.01M15 10h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"
+          />
+        </svg>
+        <h3 class="text-lg font-medium text-gray-900 dark:text-white mb-2">No projects found</h3>
+        <p class="text-gray-600 dark:text-gray-400 mb-6">
+          Try adjusting your filters or search terms.
+        </p>
+        <button (click)="clearFilters()" class="btn-primary">Clear all filters</button>
+      </div>
+    </div>
+    } @else {
+    <!-- Projects Grid -->
+    <app-projects-grid
+      [projects]="filteredProjects"
+      [loading]="false"
+      [showMetrics]="true"
+      [maxTags]="4"
+      [icon]="'{}'"
+      [gridClasses]="'grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8'"
+      [emptyMessage]="'No projects match your filters.'"
+      (projectClick)="onProjectClick($any($event))"
+    ></app-projects-grid>
+    }
+
+    <!-- Back to Top -->
+    @if (filteredProjects.length > 6) {
+    <div class="text-center mt-12 pt-8 border-t border-gray-200 dark:border-gray-800">
+      <button
+        (click)="scrollToTop()"
+        class="inline-flex items-center gap-2 text-sm text-gray-600 dark:text-gray-400 hover:text-gray-900 dark:hover:text-white"
+      >
+        <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path
+            stroke-linecap="round"
+            stroke-linejoin="round"
+            stroke-width="2"
+            d="M5 10l7-7m0 0l7 7m-7-7v18"
+          />
+        </svg>
+        Back to top
+      </button>
+    </div>
+    }
+  </div>
+</div>

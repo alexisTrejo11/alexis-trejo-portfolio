@@ -1,0 +1,297 @@
+[
+  {
+    "id": "backend_drugstore_microservices",
+    "title": "Backend Drugstore Microservices",
+    "shortDescription": "Scalable microservices architecture for pharmaceutical management",
+    "fullDescription": "A complete microservices architecture for a drugstore application with inventory management, prescription processing, and customer management systems. Built with event-driven architecture and containerized deployment.",
+    "category": "backend",
+    "type": "microservices",
+    "status": "production",
+    "featured": true,
+    "year": 2024,
+    "technologies": [
+      "Java",
+      "Spring Boot",
+      "Docker",
+      "Kubernetes",
+      "PostgreSQL",
+      "Redis",
+      "MongoDB",
+      "RabbitMQ",
+      "AWS",
+      "Terraform"
+    ],
+    "tags": ["microservices", "event-driven", "scalable", "docker", "aws"],
+    "metrics": [
+      { "label": "Services", "value": "8", "icon": "layers" },
+      { "label": "APIs", "value": "24", "icon": "api" },
+      { "label": "Performance", "value": "99.9%", "icon": "zap" }
+    ],
+    "links": {
+      "github": "https://github.com/alexisTrejo11/backend_drugstore_microservices",
+      "demo": null,
+      "documentation": null,
+      "dockerHub": null
+    },
+    "features": [
+      "Real-time inventory updates",
+      "Prescription validation system",
+      "Automated stock alerts",
+      "Multi-tenant architecture"
+    ],
+    "images": {
+      "cover": "/assets/images/projects/drugstore/cover.jpg",
+      "screenshots": [],
+      "diagram": "/assets/images/projects/drugstore/architecture.svg"
+    }
+  },
+  {
+    "id": "backend_reading_tracker",
+    "title": "Reading Tracker API",
+    "shortDescription": "RESTful API for personal reading management",
+    "fullDescription": "A Go-based RESTful API for tracking reading progress across books, articles, and papers. Features include progress tracking, categorization, tagging, and reading statistics with JWT authentication.",
+    "category": "backend",
+    "type": "api",
+    "status": "production",
+    "featured": true,
+    "year": 2024,
+    "technologies": ["Go", "Gin", "MongoDB", "Docker", "JWT", "AWS ECS"],
+    "tags": ["go", "rest-api", "tracking", "docker", "authentication"],
+    "metrics": [
+      { "label": "Endpoints", "value": "12", "icon": "link" },
+      { "label": "Response Time", "value": "<100ms", "icon": "clock" },
+      { "label": "Uptime", "value": "99.8%", "icon": "activity" }
+    ],
+    "links": {
+      "github": "https://github.com/alexisTrejo11/backend_reading_tracker",
+      "demo": "https://reading-tracker.demo.com",
+      "documentation": "https://docs.reading-tracker.com",
+      "dockerHub": "alexistrejo/reading-tracker"
+    },
+    "features": [
+      "Progress tracking with percentage",
+      "Category and tag system",
+      "Reading statistics dashboard",
+      "Export to PDF/CSV"
+    ],
+    "images": {
+      "cover": "/assets/images/projects/reading/cover.jpg",
+      "screenshots": [],
+      "diagram": "/assets/images/projects/reading/architecture.svg"
+    }
+  },
+  {
+    "id": "backend_microservices_architecture_college",
+    "title": "College Management Microservices",
+    "shortDescription": "UNAM-inspired college system architecture",
+    "fullDescription": "Microservices architecture replicating UNAM's college management system. Includes student enrollment, course management, grading, notifications, and inter-service communication with event-driven patterns.",
+    "category": "backend",
+    "type": "microservices",
+    "status": "development",
+    "featured": true,
+    "year": 2024,
+    "technologies": [
+      "Java",
+      "Spring Boot",
+      "Docker",
+      "Kubernetes",
+      "PostgreSQL",
+      "Redis",
+      "MongoDB",
+      "RabbitMQ",
+      "AWS",
+      "Prometheus",
+      "Grafana"
+    ],
+    "tags": ["education", "microservices", "scalable", "monitoring", "aws"],
+    "metrics": [
+      { "label": "Services", "value": "10", "icon": "layers" },
+      { "label": "Students", "value": "5k+", "icon": "users" },
+      { "label": "Courses", "value": "200+", "icon": "book-open" }
+    ],
+    "links": {
+      "github": "https://github.com/alexisTrejo11/backend_microservices_architecture_college",
+      "demo": null,
+      "documentation": null,
+      "dockerHub": null
+    },
+    "features": [
+      "Student enrollment workflow",
+      "Course scheduling system",
+      "Grade management",
+      "Notification service"
+    ],
+    "images": {
+      "cover": "/assets/images/projects/college/cover.jpg",
+      "screenshots": [],
+      "diagram": "/assets/images/projects/college/architecture.svg"
+    }
+  },
+  {
+    "id": "fullstack_cooking_receipt_web_app",
+    "title": "Cooking Recipe Platform",
+    "shortDescription": "Fullstack recipe sharing and management",
+    "fullDescription": "Complete web application for sharing and discovering recipes. Angular frontend with Python FastAPI backend featuring user authentication, recipe CRUD operations, search, filtering, and social features.",
+    "category": "fullstack",
+    "type": "web-app",
+    "status": "production",
+    "featured": true,
+    "year": 2024,
+    "technologies": [
+      "Angular",
+      "TypeScript",
+      "Python",
+      "FastAPI",
+      "Docker",
+      "PostgreSQL",
+      "AWS",
+      "Tailwind CSS",
+      "JWT"
+    ],
+    "tags": ["fullstack", "recipes", "angular", "fastapi", "docker"],
+    "metrics": [
+      { "label": "Recipes", "value": "500+", "icon": "utensils" },
+      { "label": "Users", "value": "1k+", "icon": "users" },
+      { "label": "Uptime", "value": "99.9%", "icon": "activity" }
+    ],
+    "links": {
+      "github": "https://github.com/alexisTrejo11/fullstack_cooking_receipt_web_app",
+      "demo": "https://cookbook.demo.com",
+      "documentation": "https://docs.cookbook.com",
+      "dockerHub": "alexistrejo/cookbook"
+    },
+    "features": [
+      "Recipe search with filters",
+      "User profiles and collections",
+      "Step-by-step cooking guide",
+      "Nutritional information"
+    ],
+    "images": {
+      "cover": "/assets/images/projects/cookbook/cover.jpg",
+      "screenshots": [],
+      "diagram": "/assets/images/projects/cookbook/architecture.svg"
+    }
+  },
+  {
+    "id": "backend_microservice_video-courses_platform",
+    "title": "Video Courses Platform",
+    "shortDescription": "Microservices-based e-learning platform",
+    "fullDescription": "Scalable video course platform with microservices architecture. Includes course management, user enrollment, video streaming, payment processing, and notification systems with Go Fiber framework.",
+    "category": "backend",
+    "type": "microservices",
+    "status": "development",
+    "featured": false,
+    "year": 2024,
+    "technologies": [
+      "Go",
+      "Fiber",
+      "Docker",
+      "Kubernetes",
+      "PostgreSQL",
+      "Redis",
+      "MongoDB",
+      "RabbitMQ",
+      "AWS S3",
+      "Stripe API"
+    ],
+    "tags": ["education", "video", "microservices", "go", "aws"],
+    "metrics": [
+      { "label": "Courses", "value": "50+", "icon": "video" },
+      { "label": "Students", "value": "2k+", "icon": "users" },
+      { "label": "Videos", "value": "200+", "icon": "film" }
+    ],
+    "links": {
+      "github": "https://github.com/alexisTrejo11/backend_microservice_video-courses_platform",
+      "demo": null,
+      "documentation": null,
+      "dockerHub": null
+    },
+    "features": [
+      "Video streaming with HLS",
+      "Course progress tracking",
+      "Payment integration",
+      "Certificate generation"
+    ],
+    "images": {
+      "cover": "/assets/images/projects/video-courses/cover.jpg",
+      "screenshots": [],
+      "diagram": "/assets/images/projects/video-courses/architecture.svg"
+    }
+  },
+  {
+    "id": "backend_microservice_cinema_app",
+    "title": "Cinema Management System",
+    "shortDescription": "Microservices for cinema operations",
+    "fullDescription": "Complete cinema management system with microservices for movie catalog, showtime scheduling, ticket booking, payment processing, and notification services using Python FastAPI.",
+    "category": "backend",
+    "type": "microservices",
+    "status": "production",
+    "featured": true,
+    "year": 2024,
+    "technologies": [
+      "Python",
+      "FastAPI",
+      "Docker",
+      "Kubernetes",
+      "PostgreSQL",
+      "Redis",
+      "MongoDB",
+      "RabbitMQ",
+      "AWS",
+      "Stripe API"
+    ],
+    "tags": ["entertainment", "ticketing", "fastapi", "microservices", "docker"],
+    "metrics": [
+      { "label": "Theaters", "value": "20+", "icon": "home" },
+      { "label": "Daily Tickets", "value": "5k+", "icon": "ticket" },
+      { "label": "Movies", "value": "500+", "icon": "film" }
+    ],
+    "links": {
+      "github": "https://github.com/alexisTrejo11/backend_microservice_cinema_app",
+      "demo": "https://cinema.demo.com",
+      "documentation": "https://docs.cinema-system.com",
+      "dockerHub": "alexistrejo/cinema-system"
+    },
+    "features": [
+      "Real-time seat selection",
+      "Online payment processing",
+      "Email/SMS notifications",
+      "Analytics dashboard"
+    ],
+    "images": {
+      "cover": "/assets/images/projects/cinema/cover.jpg",
+      "screenshots": [],
+      "diagram": "/assets/images/projects/cinema/architecture.svg"
+    }
+  },
+  {
+    "id": "frontend_cinema_app",
+    "title": "Cinema Frontend",
+    "shortDescription": "Angular UI for cinema booking",
+    "fullDescription": "Responsive Angular application for cinema ticket booking with real-time seat selection, movie browsing, showtime checking, and booking management using Angular Material and Tailwind CSS.",
+    "category": "frontend",
+    "type": "web-app",
+    "status": "production",
+    "featured": false,
+    "year": 2024,
+    "technologies": ["Angular", "TypeScript", "Tailwind CSS", "RxJS", "Angular Material"],
+    "tags": ["angular", "ui", "responsive", "cinema", "tailwind"],
+    "metrics": [
+      { "label": "Pages", "value": "8", "icon": "file" },
+      { "label": "Components", "value": "25+", "icon": "package" },
+      { "label": "Performance", "value": "95/100", "icon": "zap" }
+    ],
+    "links": {
+      "github": "https://github.com/alexisTrejo11/frontend_cinema_app",
+      "demo": "https://cinema-frontend.demo.com",
+      "documentation": null,
+      "dockerHub": null
+    },
+    "features": ["Real-time seat map", "Movie trailers", "User reviews", "Mobile-first design"],
+    "images": {
+      "cover": "/assets/images/projects/cinema-frontend/cover.jpg",
+      "screenshots": [],
+      "diagram": null
+    }
+  }
+]

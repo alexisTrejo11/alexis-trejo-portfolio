@@ -10,6 +10,5 @@ import { CtaSection } from './components/cta-section/cta-section';
   selector: 'app-home',
   imports: [Hero, TechStack, FeaturedProjects, BackendExpertise, QuickStats, CtaSection],
   templateUrl: './home.html',
-  styleUrl: './home.scss',
 })
 export class Home {}

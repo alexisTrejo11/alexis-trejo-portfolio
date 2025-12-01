@@ -1,5 +1,5 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
-import { Stat } from '../../../../models/models';
+import { Stat } from '../../../../core/models/hero';
 import { CommonModule } from '@angular/common';
 
 @Component({

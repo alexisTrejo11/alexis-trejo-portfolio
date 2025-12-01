@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { Technology } from '../../../../models/models';
+import { Technology } from '../../../../core/models/hero';
 import { CommonModule } from '@angular/common';
 
 @Component({
