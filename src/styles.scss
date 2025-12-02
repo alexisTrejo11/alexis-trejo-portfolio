@@ -1,7 +1,78 @@
+/* Angular Material Theme */
 @import '@angular/material/prebuilt-themes/azure-blue.css';
+
+/* Tailwind Directives */
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+/* ============================================
+   CUSTOM CSS VARIABLES & GRADIENTS
+   ============================================ */
+
+:root {
+  /* Gradiente principal - Esmeralda/Teal/Índigo */
+  --gradient-primary: linear-gradient(135deg, #10b981 0%, #0d9488 50%, #4338ca 100%);
+  --gradient-primary-dark: linear-gradient(135deg, #059669 0%, #0f766e 50%, #3730a3 100%);
+
+  /* Colores individuales para referencias */
+  --color-emerald: #10b981;
+  --color-teal: #0d9488;
+  --color-indigo: #4338ca;
+  --color-emerald-dark: #059669;
+  --color-teal-dark: #0f766e;
+  --color-indigo-dark: #3730a3;
+
+  /* Otros gradientes basados en el primario */
+  --gradient-primary-reverse: linear-gradient(135deg, #4338ca 0%, #0d9488 50%, #10b981 100%);
+  --gradient-primary-subtle: linear-gradient(
+    135deg,
+    rgba(16, 185, 129, 0.1) 0%,
+    rgba(13, 148, 136, 0.1) 50%,
+    rgba(67, 56, 202, 0.1) 100%
+  );
+}
+
+.dark {
+  --gradient-primary: var(--gradient-primary-dark);
+  --gradient-primary-reverse: linear-gradient(135deg, #3730a3 0%, #0f766e 50%, #059669 100%);
+}
+
+/* ============================================
+   TAILWIND LAYERS
+   ============================================ */
+
+@layer base {
+  * {
+    @apply box-border;
+  }
+
+  html {
+    @apply scroll-smooth;
+  }
+
+  body {
+    @apply bg-white text-gray-900 antialiased;
+    font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+
+    /* Dark mode by default if the system prefers it */
+    @media (prefers-color-scheme: dark) {
+      &:not(.light) {
+        @apply dark:bg-gray-950 dark:text-white;
+      }
+    }
+
+    /* When the dark class is present */
+    &.dark {
+      @apply bg-gray-950 text-white;
+    }
+  }
+
+  code,
+  pre {
+    font-family: 'Fira Code', 'JetBrains Mono', 'Consolas', monospace;
+  }
+}
 
 @layer components {
   /* === CARDS === */
@@ -23,7 +94,7 @@
   }
 
   .btn-primary {
-    @apply btn bg-blue-600 hover:bg-blue-700 text-white hover:shadow-lg hover:scale-105;
+    @apply btn bg-blue-600 hover:bg-blue-700 text-white hover:shadow-lg hover:scale-105 dark:bg-blue-700 dark:hover:bg-blue-800;
   }
 
   .btn-secondary {
@@ -63,60 +134,14 @@
     @apply badge bg-gray-100 text-gray-700 dark:bg-gray-800 dark:text-gray-300;
   }
 
-  /* === CODE BLOCKS === */
-  .code-block {
-    @apply bg-gray-900 dark:bg-gray-950 text-gray-100 rounded-xl overflow-hidden border border-gray-800 dark:border-gray-700;
-  }
-
-  .code-header {
-    @apply flex items-center justify-between px-4 py-3 bg-gray-800 dark:bg-gray-900 border-b border-gray-700 dark:border-gray-800;
-  }
-
-  .code-content {
-    @apply p-4 overflow-x-auto font-mono text-sm leading-relaxed;
-  }
-
-  .code-line {
-    @apply block px-4 py-1 hover:bg-gray-800/50 transition-colors;
-  }
-
-  .code-line-number {
-    @apply inline-block w-8 text-right mr-4 text-gray-500 select-none;
-  }
-
   /* === INPUTS === */
   .input {
     @apply w-full px-4 py-2 border border-gray-300 dark:border-gray-700 rounded-lg bg-white dark:bg-gray-900 text-gray-900 dark:text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-blue-600 focus:border-transparent transition-all;
   }
 
-  .input-group {
-    @apply flex items-center gap-2;
-  }
-
-  /* === TABS === */
-  .tabs {
-    @apply flex border-b border-gray-200 dark:border-gray-800;
-  }
-
-  .tab {
-    @apply px-4 py-3 font-medium text-gray-600 dark:text-gray-400 hover:text-gray-900 dark:hover:text-white border-b-2 border-transparent transition-colors cursor-pointer;
-  }
-
-  .tab-active {
-    @apply tab text-blue-600 dark:text-blue-400 border-blue-600 dark:border-blue-400;
-  }
-
-  /* === SECTIONS === */
-  .section {
-    @apply py-12 md:py-16 lg:py-20;
-  }
-
-  .section-title {
-    @apply text-3xl md:text-4xl font-bold text-gray-900 dark:text-white mb-6;
-  }
-
-  .section-subtitle {
-    @apply text-lg text-gray-600 dark:text-gray-400 mb-8;
+  /* === TEXT UTILITIES === */
+  .text-gradient {
+    @apply bg-clip-text text-transparent bg-gradient-to-r from-blue-600 to-purple-600;
   }
 
   /* === NAVIGATION === */
@@ -127,151 +152,10 @@
   .nav-link-active {
     @apply nav-link bg-blue-600 text-white dark:bg-blue-500;
   }
-
-  /* === SIDEBAR === */
-  .sidebar {
-    @apply fixed top-0 left-0 z-30 w-64 h-screen bg-gray-50 dark:bg-gray-900 border-r border-gray-200 dark:border-gray-800 overflow-y-auto;
-  }
-
-  /* === MODALS === */
-  .modal-overlay {
-    @apply fixed inset-0 z-50 bg-black/80 flex items-center justify-center p-4;
-  }
-
-  .modal-content {
-    @apply bg-white dark:bg-gray-900 rounded-xl max-w-4xl w-full max-h-[90vh] overflow-y-auto;
-  }
-
-  .modal-header {
-    @apply p-6 border-b border-gray-200 dark:border-gray-800 flex items-center justify-between;
-  }
-
-  .modal-body {
-    @apply p-6;
-  }
-
-  /* === TOOLTIPS === */
-  .tooltip {
-    @apply absolute z-50 px-3 py-2 text-sm bg-gray-900 dark:bg-gray-800 text-white rounded-lg shadow-lg;
-  }
-
-  /* === GRADIENTS === */
-  .gradient-primary {
-    @apply bg-gradient-to-br from-blue-600 to-purple-600;
-  }
-
-  .gradient-secondary {
-    @apply bg-gradient-to-br from-gray-600 to-gray-800;
-  }
-
-  .gradient-success {
-    @apply bg-gradient-to-br from-green-600 to-teal-600;
-  }
-
-  /* === TEXT UTILITIES === */
-  .text-gradient {
-    @apply bg-clip-text text-transparent bg-gradient-to-r from-blue-600 to-purple-600;
-  }
-
-  .prose-custom {
-    @apply text-gray-600 dark:text-gray-400 leading-relaxed;
-
-    h1,
-    h2,
-    h3,
-    h4,
-    h5,
-    h6 {
-      @apply text-gray-900 dark:text-white font-bold mb-4;
-    }
-
-    a {
-      @apply text-blue-600 dark:text-blue-400 hover:underline;
-    }
-
-    code {
-      @apply bg-gray-100 dark:bg-gray-800 px-2 py-1 rounded text-sm font-mono;
-    }
-
-    pre {
-      @apply code-block;
-    }
-
-    ul,
-    ol {
-      @apply space-y-2 ml-6;
-    }
-
-    li {
-      @apply flex items-start gap-2;
-    }
-  }
-
-  /* === GRID LAYOUTS === */
-  .grid-auto-fit {
-    @apply grid gap-6;
-    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-  }
-
-  .grid-auto-fill {
-    @apply grid gap-6;
-    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
-  }
-
-  /* === SCROLLBAR === */
-  .custom-scrollbar {
-    &::-webkit-scrollbar {
-      @apply w-2 h-2;
-    }
-
-    &::-webkit-scrollbar-track {
-      @apply bg-gray-100 dark:bg-gray-900;
-    }
-
-    &::-webkit-scrollbar-thumb {
-      @apply bg-gray-400 dark:bg-gray-600 rounded-full;
-    }
-
-    &::-webkit-scrollbar-thumb:hover {
-      @apply bg-gray-500 dark:bg-gray-500;
-    }
-  }
-
-  /* === SYNTAX HIGHLIGHTING TOKENS === */
-  .token-keyword {
-    @apply text-purple-400;
-  }
-
-  .token-string {
-    @apply text-green-400;
-  }
-
-  .token-number {
-    @apply text-orange-400;
-  }
-
-  .token-comment {
-    @apply text-gray-500 italic;
-  }
-
-  .token-function {
-    @apply text-blue-400;
-  }
-
-  .token-operator {
-    @apply text-pink-400;
-  }
-
-  .token-variable {
-    @apply text-cyan-400;
-  }
 }
 
-/* ============================================
-   ANIMATIONS
-   ============================================ */
-
 @layer utilities {
+  /* === ANIMATIONS === */
   .animate-fade-in {
     animation: fadeIn 0.3s ease-in-out;
   }
@@ -287,7 +171,95 @@
   .animate-scale-in {
     animation: scaleIn 0.3s ease-out;
   }
+
+  /* === CUSTOM UTILITIES === */
+  .backdrop-blur-sm {
+    backdrop-filter: blur(8px);
+    -webkit-backdrop-filter: blur(8px);
+  }
+
+  /* === GRADIENTS UTILITIES === */
+  .gradient-primary {
+    background: var(--gradient-primary);
+  }
+
+  .dark .gradient-primary {
+    background: var(--gradient-primary-dark);
+  }
+
+  .gradient-primary-reverse {
+    background: var(--gradient-primary-reverse);
+  }
+
+  .gradient-primary-subtle {
+    background: var(--gradient-primary-subtle);
+  }
+
+  /* Texto con gradiente */
+  .text-gradient-primary {
+    background: var(--gradient-primary);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+  }
+
+  .dark .text-gradient-primary {
+    background: var(--gradient-primary-dark);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+  }
+
+  /* Borde con gradiente */
+  .border-gradient-primary {
+    border: 2px solid transparent;
+    background: linear-gradient(white, white) padding-box, var(--gradient-primary) border-box;
+  }
+
+  .dark .border-gradient-primary {
+    background: linear-gradient(#030712, #030712) padding-box,
+      var(--gradient-primary-dark) border-box;
+  }
+
+  /* Botón con gradiente */
+  .btn-gradient-primary {
+    background: var(--gradient-primary);
+    color: white;
+    @apply px-6 py-3 font-medium rounded-lg transition-all duration-300 hover:shadow-xl hover:scale-105;
+  }
+
+  .dark .btn-gradient-primary {
+    background: var(--gradient-primary-dark);
+  }
+
+  .btn-gradient-primary:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 10px 25px -5px rgba(16, 185, 129, 0.4);
+  }
+
+  /* Gradiente animado */
+  .gradient-animated {
+    background-size: 200% 200%;
+    animation: gradient-shift 8s ease infinite;
+  }
+
+  /* Tailwind classes alternativas */
+  .bg-gradient-brand {
+    @apply bg-gradient-to-br from-emerald-500 via-teal-500 to-indigo-700 dark:from-emerald-600 dark:via-teal-600 dark:to-indigo-800;
+  }
+
+  .bg-gradient-brand-reverse {
+    @apply bg-gradient-to-br from-indigo-700 via-teal-500 to-emerald-500 dark:from-indigo-800 dark:via-teal-600 dark:to-emerald-600;
+  }
+
+  .bg-gradient-brand-subtle {
+    @apply bg-gradient-to-br from-emerald-100 via-teal-100 to-indigo-100 dark:from-emerald-900/30 dark:via-teal-900/30 dark:to-indigo-900/30;
+  }
 }
+
+/* ============================================
+   KEYFRAMES
+   ============================================ */
 
 @keyframes fadeIn {
   from {
@@ -331,55 +303,81 @@
   }
 }
 
+@keyframes gradient-shift {
+  0% {
+    background-position: 0% 50%;
+  }
+  50% {
+    background-position: 100% 50%;
+  }
+  100% {
+    background-position: 0% 50%;
+  }
+}
+
 /* ============================================
    GLOBAL STYLES
    ============================================ */
 
-* {
-  @apply box-border;
-}
-
-html {
-  @apply scroll-smooth;
-}
-
-body {
-  @apply bg-white dark:bg-gray-950 text-gray-900 dark:text-white antialiased;
-  font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
-}
-
-code,
-pre {
-  font-family: 'Fira Code', 'JetBrains Mono', 'Consolas', monospace;
-}
-
-/* Custom Scrollbar Globally */
+/* Custom Scrollbar */
 ::-webkit-scrollbar {
-  @apply w-2 h-2;
+  width: 10px;
+  height: 10px;
 }
 
 ::-webkit-scrollbar-track {
-  @apply bg-gray-100 dark:bg-gray-900;
+  background: #f1f1f1;
+}
+
+.dark ::-webkit-scrollbar-track {
+  background: #1f2937;
 }
 
 ::-webkit-scrollbar-thumb {
-  @apply bg-gray-400 dark:bg-gray-600 rounded-full;
+  background: #888;
+  border-radius: 5px;
+}
+
+.dark ::-webkit-scrollbar-thumb {
+  background: #4b5563;
 }
 
 ::-webkit-scrollbar-thumb:hover {
-  @apply bg-gray-500 dark:bg-gray-500;
+  background: #555;
+}
+
+.dark ::-webkit-scrollbar-thumb:hover {
+  background: #6b7280;
 }
 
 /* Selection */
 ::selection {
-  @apply bg-blue-600 text-white;
+  background-color: #3b82f6;
+  color: white;
 }
 
-::-moz-selection {
-  @apply bg-blue-600 text-white;
+.dark ::selection {
+  background-color: #60a5fa;
 }
 
-/* Focus visible for accessibility */
+/* Focus styles */
 *:focus-visible {
-  @apply outline-2 outline-offset-2 outline-blue-600;
+  outline: 2px solid #3b82f6;
+  outline-offset: 2px;
+}
+
+.dark *:focus-visible {
+  outline-color: #60a5fa;
+}
+
+/* Logo Gradient */
+.logo-gradient {
+  background: linear-gradient(135deg, #ec4899, #8b5cf6, #3b82f6);
+  background-size: 200% 200%;
+  animation: gradient-shift 3s ease infinite;
+}
+
+/* Smooth transitions para dark mode */
+* {
+  transition: background-color 0.3s ease, border-color 0.3s ease, color 0.3s ease;
 }

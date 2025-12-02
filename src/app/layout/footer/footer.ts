@@ -17,7 +17,6 @@ interface FooterLink {
   selector: 'app-footer',
   imports: [CommonModule, RouterModule],
   templateUrl: './footer.html',
-  styleUrl: './footer.scss',
 })
 export class Footer {
   currentYear = new Date().getFullYear();
