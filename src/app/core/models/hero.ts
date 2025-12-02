@@ -1,8 +1,32 @@
 export interface Technology {
+  id: string;
   name: string;
-  category: string;
+  category: TechCategory;
   icon: string;
   color: string;
+  level: 'expert' | 'advanced' | 'intermediate' | 'beginner';
+  description?: string;
+  projectsCount?: number;
+  yearsExperience?: number;
+}
+
+export type TechCategory =
+  | 'language'
+  | 'backend-framework'
+  | 'frontend-framework'
+  | 'database'
+  | 'devops'
+  | 'cloud'
+  | 'tool'
+  | 'other';
+
+export interface TechCategoryInfo {
+  id: TechCategory;
+  name: string;
+  description: string;
+  icon: string;
+  color: string;
+  count: number;
 }
 
 export interface Expertise {
@@ -17,17 +41,4 @@ export interface Stat {
   value: number;
   suffix: string;
   duration: number;
-}
-
-export interface FeatureProject {
-  id: string;
-  title: string;
-  description: string;
-  tags: string[];
-  metrics: {
-    label: string;
-    value: string;
-  }[];
-  image: string;
-  featured: boolean;
 }

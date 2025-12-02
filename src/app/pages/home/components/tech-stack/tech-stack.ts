@@ -1,6 +1,7 @@
-import { Component } from '@angular/core';
-import { Technology } from '../../../../core/models/hero';
+import { Component, inject } from '@angular/core';
+import { TechCategoryInfo, Technology } from '../../../../core/models/hero';
 import { CommonModule } from '@angular/common';
+import { TechStackService } from '../../../../services/tech-stack.service';
 
 @Component({
   selector: 'app-tech-stack',
@@ -8,48 +9,72 @@ import { CommonModule } from '@angular/common';
   templateUrl: './tech-stack.html',
 })
 export class TechStack {
-  technologies: Technology[] = [
-    { name: 'Python', category: 'Language', icon: '🐍', color: 'text-blue-500' },
-    { name: 'Git', category: 'Version Control', icon: '🔧', color: 'text-orange-600' },
-    { name: 'Docker', category: 'Containerization', icon: '🐳', color: 'text-blue-400' },
-    { name: 'Java', category: 'Language', icon: '☕', color: 'text-red-700' },
-    { name: 'TypeScript', category: 'Language', icon: 'TS', color: 'text-blue-600' },
-    { name: 'Angular', category: 'Framework', icon: '🅰️', color: 'text-red-500' },
-    { name: 'Spring Boot', category: 'Framework', icon: '🌱', color: 'text-green-600' },
-    { name: 'Django', category: 'Framework', icon: '🌐', color: 'text-green-800' },
-    { name: 'FastAPI', category: 'Framework', icon: '⚡', color: 'text-pink-500' },
-    { name: 'Gin', category: 'Framework', icon: '🍸', color: 'text-teal-500' },
-    { name: 'RabbitMQ', category: 'Messaging Queue', icon: '🐇', color: 'text-red-400' },
-    { name: 'Fiber (Go)', category: 'Framework', icon: '🌾', color: 'text-blue-700' },
-    { name: 'PostgreSQL', category: 'Database', icon: '🐘', color: 'text-indigo-600' },
-    { name: 'Redis', category: 'Database', icon: '🧠', color: 'text-red-600' },
-    { name: 'MongoDB', category: 'Database', icon: '🍃', color: 'text-green-600' },
-    { name: 'HTML5', category: 'Other', icon: '📄', color: 'text-orange-500' },
-    { name: 'CSS3', category: 'Other', icon: '🎨', color: 'text-blue-500' },
-    { name: 'Linux', category: 'Other', icon: '🐧', color: 'text-black' },
-    { name: 'GraphQL', category: 'Other', icon: '🔺', color: 'text-pink-600' },
-    { name: 'Graphic Design', category: 'Other', icon: '🎨', color: 'text-purple-500' },
-  ];
+  private techStackService = inject(TechStackService);
 
-  categories = [
-    'Language',
-    'Framework',
-    'Database',
-    'Version Control',
-    'Containerization',
-    'Messaging Queue',
-    'Other',
-  ];
+  technologies: Technology[] = [];
+  categories: TechCategoryInfo[] = [];
+  selectedCategory: string = 'all';
+  isLoading: boolean = true;
+  statistics: any;
 
-  selectedCategory: string = 'All';
-
-  get filteredTechnologies(): Technology[] {
-    return this.selectedCategory === 'All'
-      ? this.technologies
-      : this.technologies.filter((t) => t.category === this.selectedCategory);
+  ngOnInit(): void {
+    this.loadData();
   }
 
-  selectCategory(category: string) {
-    this.selectedCategory = category;
+  private loadData(): void {
+    this.isLoading = true;
+
+    // Simular carga
+    setTimeout(() => {
+      this.technologies = this.techStackService.getAllTechnologies();
+      this.categories = this.techStackService.getCategories();
+      this.statistics = this.techStackService.getStatistics();
+      this.isLoading = false;
+    }, 300);
+  }
+
+  get filteredTechnologies(): Technology[] {
+    if (this.selectedCategory === 'all') {
+      return this.technologies;
+    }
+    return this.technologies.filter((tech) => tech.category === this.selectedCategory);
+  }
+
+  selectCategory(categoryId: string): void {
+    this.selectedCategory = categoryId;
+  }
+
+  getLevelColor(level: string): string {
+    switch (level) {
+      case 'expert':
+        return 'bg-green-100 text-green-800 dark:bg-green-900/30 dark:text-green-400';
+      case 'advanced':
+        return 'bg-blue-100 text-blue-800 dark:bg-blue-900/30 dark:text-blue-400';
+      case 'intermediate':
+        return 'bg-yellow-100 text-yellow-800 dark:bg-yellow-900/30 dark:text-yellow-400';
+      case 'beginner':
+        return 'bg-gray-100 text-gray-800 dark:bg-gray-800 dark:text-gray-300';
+      default:
+        return 'bg-gray-100 text-gray-800';
+    }
+  }
+
+  getLevelText(level: string): string {
+    switch (level) {
+      case 'expert':
+        return 'Expert';
+      case 'advanced':
+        return 'Advanced';
+      case 'intermediate':
+        return 'Intermediate';
+      case 'beginner':
+        return 'Beginner';
+      default:
+        return level;
+    }
+  }
+
+  clearFilter(): void {
+    this.selectedCategory = 'all';
   }
 }
