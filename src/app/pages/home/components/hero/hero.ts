@@ -8,16 +8,50 @@ import { Router } from '@angular/router';
   imports: [CommonModule],
   templateUrl: './hero.html',
 })
-export class Hero implements OnInit {
-  displayText = signal('');
-  private fullText = ' Building scalable backend systems'; // Starts empty to be filled by typing effect
-  private typingSpeed = 60;
-  private initialDelay = 200;
+export class Hero {
   private router = inject(Router);
+
+  // Señales para efectos
+  displayText = signal('');
+  terminalLines = signal<string[]>([]);
+  currentLine = signal(0);
+  isTypingComplete = signal(false);
+
+  // Textos configurables
+  private fullText = 'Software Engineer specializing in Backend Development.';
+  private typingSpeed = 50;
+  private initialDelay = 300;
+
+  // Texto del terminal
+  private terminalCode = [
+    '// System Architecture',
+    'class BackendEngineer {',
+    '  constructor() {',
+    '    this.expertise = ["Java", "TypeScript", "Python"];',
+    '    this.focus = "scalable systems";',
+    '    this.cloud = ["AWS", "Docker", "Kubernetes"];',
+    '  }',
+    '  deploy() {',
+    '    return pipeline',
+    '      .withMicroservices()',
+    '      .withCI_CD()',
+    '      .toProduction();',
+    '  }',
+    '}',
+    '',
+    '// Current Status',
+    'const engineer = new BackendEngineer();',
+    'engineer.deploy().then(success => {',
+    '  console.log("Systems operational");',
+    '});',
+  ];
 
   ngOnInit(): void {
     this.startTypingEffect();
+    this.startTerminalEffect();
   }
+
+  ngOnDestroy(): void {}
 
   private startTypingEffect(): void {
     let index = 0;
@@ -28,15 +62,38 @@ export class Hero implements OnInit {
         this.displayText.update((current) => current + this.fullText.charAt(index));
         index++;
         setTimeout(typeCharacter, this.typingSpeed);
+      } else {
+        this.isTypingComplete.set(true);
       }
     };
 
     setTimeout(typeCharacter, this.initialDelay);
   }
 
-  scrollToProjects() {
-    document.querySelector('#featured-projects')?.scrollIntoView({
-      behavior: 'smooth',
-    });
+  private startTerminalEffect(): void {
+    let lineIndex = 0;
+    const terminalInterval = setInterval(() => {
+      if (lineIndex < this.terminalCode.length) {
+        this.terminalLines.update((lines) => [...lines, this.terminalCode[lineIndex]]);
+        lineIndex++;
+        this.currentLine.set(lineIndex);
+      } else {
+        clearInterval(terminalInterval);
+      }
+    }, 150);
+  }
+
+  scrollToProjects(): void {
+    const projectsSection = document.getElementById('featured-projects');
+    if (projectsSection) {
+      projectsSection.scrollIntoView({ behavior: 'smooth' });
+    } else {
+      this.router.navigate(['/projects']);
+    }
+  }
+
+  viewResume(): void {
+    // TODO: Replace with actual resume link
+    window.open('/assets/resume.pdf', '_blank');
   }
 }
