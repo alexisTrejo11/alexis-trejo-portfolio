@@ -1,0 +1,68 @@
+<section id="journey" class="section bg-white dark:bg-gray-950 pt-20 pb-32">
+  <div class="max-w-6xl mx-auto px-6">
+    <!-- Section Header -->
+    <div class="text-center mb-20">
+      <h2 class="section-title">My Journey to Engineering Excellence</h2>
+      <p class="section-subtitle max-w-3xl mx-auto">
+        From zero coding knowledge to building production systems serving thousands. Here's how
+        passion and persistence turned curiosity into expertise.
+      </p>
+    </div>
+
+    <!-- Timeline -->
+    <div class="relative">
+      <!-- Center Line -->
+      <div
+        class="hidden lg:block absolute left-1/2 transform -translate-x-1/2 w-1 h-full bg-gradient-to-b from-blue-600 to-purple-600 dark:from-blue-400 dark:to-purple-400"
+      ></div>
+
+      <!-- Timeline Events -->
+      <div class="space-y-12">
+        <div
+          *ngFor="let event of timeline; let i = index"
+          [class.lg:flex-row-reverse]="i % 2 === 0"
+          class="relative flex flex-col lg:flex-row items-center gap-8"
+        >
+          <!-- Content Card -->
+          <div class="flex-1 w-full lg:w-auto">
+            <div [class.lg:text-right]="i % 2 === 0" class="card-hover p-8 group">
+              <!-- Icon & Year -->
+              <div [class.lg:justify-end]="i % 2 === 0" class="flex items-center gap-4 mb-4">
+                <div
+                  [ngClass]="'bg-gradient-to-br ' + event.color"
+                  class="w-16 h-16 rounded-xl flex items-center justify-center text-3xl shadow-lg transform group-hover:scale-110 transition-transform"
+                >
+                  {{ event.icon }}
+                </div>
+                <div>
+                  <div class="text-2xl font-bold text-gray-900 dark:text-white">
+                    {{ event.year }}
+                  </div>
+                  <div class="text-sm text-gray-500 dark:text-gray-400">Chapter {{ i + 1 }}</div>
+                </div>
+              </div>
+
+              <!-- Title -->
+              <h3 class="text-2xl font-bold text-gray-900 dark:text-white mb-3">
+                {{ event.title }}
+              </h3>
+
+              <!-- Description -->
+              <p class="text-gray-600 dark:text-gray-400 leading-relaxed">
+                {{ event.description }}
+              </p>
+            </div>
+          </div>
+
+          <!-- Timeline Dot (Desktop) -->
+          <div
+            class="hidden lg:flex w-8 h-8 rounded-full bg-gradient-to-br from-blue-600 to-purple-600 dark:from-blue-400 dark:to-purple-400 flex-shrink-0 shadow-lg z-10 ring-4 ring-white dark:ring-gray-950"
+          ></div>
+
+          <!-- Spacer -->
+          <div class="flex-1 hidden lg:block"></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>

@@ -1,0 +1,86 @@
+<section
+  class="py-20 px-4 bg-gradient-to-b from-white to-gray-50 dark:from-gray-950 dark:to-gray-900"
+>
+  <div class="max-w-6xl mx-auto">
+    <!-- Section Header with Personal Touch -->
+    <div class="text-center mb-16">
+      <div
+        class="inline-flex items-center justify-center w-16 h-16 rounded-full bg-gradient-to-r from-blue-600 to-cyan-600 mb-6"
+      >
+        <span class="text-2xl">⚙️</span>
+      </div>
+      <h2 class="text-4xl font-bold text-gray-900 dark:text-white mb-4">
+        Engineering Mindset, Not Just Code
+      </h2>
+      <p class="text-xl text-gray-600 dark:text-gray-400 max-w-2xl mx-auto">
+        My unique journey from architecture to software forged a distinct approach to building
+        systems
+      </p>
+    </div>
+
+    <!-- Philosophies Grid -->
+    <div class="grid md:grid-cols-2 gap-8">
+      @for (philosophy of philosophies; track philosophy.title) {
+      <div
+        class="group relative overflow-hidden rounded-2xl border-2 border-gray-200 dark:border-gray-800 hover:border-transparent transition-all duration-500 hover:scale-[1.02]"
+      >
+        <!-- Gradient Background -->
+        <div
+          [class]="
+            'absolute inset-0 bg-gradient-to-br ' +
+            philosophy.color +
+            ' opacity-0 group-hover:opacity-5 transition-opacity duration-500'
+          "
+        ></div>
+
+        <!-- Content Container -->
+        <div class="relative p-8 bg-white/90 dark:bg-gray-900/90 backdrop-blur-sm h-full">
+          <!-- Icon with Gradient Border -->
+          <div
+            class="inline-flex items-center justify-center w-16 h-16 rounded-2xl border-4 border-white dark:border-gray-800 mb-6 relative"
+          >
+            <div class="text-3xl">{{ philosophy.icon }}</div>
+            <div
+              [class]="
+                'absolute -inset-0.5 bg-gradient-to-br ' +
+                philosophy.color +
+                ' rounded-2xl blur opacity-0 group-hover:opacity-30 transition-opacity duration-500'
+              "
+            ></div>
+          </div>
+
+          <!-- Title -->
+          <h3 class="text-2xl font-bold text-gray-900 dark:text-white mb-4">
+            {{ philosophy.title }}
+          </h3>
+
+          <!-- Description -->
+          <p class="text-gray-600 dark:text-gray-300 leading-relaxed text-lg">
+            {{ philosophy.description }}
+          </p>
+
+          <!-- Subtle Connector -->
+          <div class="mt-6 pt-6 border-t border-gray-100 dark:border-gray-800">
+            <div class="text-sm text-gray-500 dark:text-gray-400">
+              Born from my journey from CAD systems to code
+            </div>
+          </div>
+        </div>
+      </div>
+      }
+    </div>
+
+    <!-- Closing Statement -->
+    <div class="mt-16 text-center max-w-3xl mx-auto">
+      <div
+        class="inline-block px-6 py-3 rounded-full bg-gradient-to-r from-blue-50 to-cyan-50 dark:from-blue-900/20 dark:to-cyan-900/20 border border-blue-200 dark:border-blue-800"
+      >
+        <p class="text-gray-700 dark:text-gray-300 italic">
+          "I don't just build software. I engineer solutions with the precision of an architect and
+          the systematic thinking of someone who understands that great systems aren't
+          written—they're architected."
+        </p>
+      </div>
+    </div>
+  </div>
+</section>

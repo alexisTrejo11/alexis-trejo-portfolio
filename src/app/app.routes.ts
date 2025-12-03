@@ -3,6 +3,8 @@ import { Home } from './pages/home/home';
 import { projectDocsRoutes } from './pages/project-docs/project-docs.routes';
 import { ProjectDocs } from './pages/project-docs/project-docs';
 import { ProjectsList } from './pages/projects-list/projects-list';
+import { About } from './pages/about/about';
+import { Contact } from './pages/contact/contact';
 
 export const routes: Routes = [
   {
@@ -17,6 +19,14 @@ export const routes: Routes = [
   {
     path: 'projects',
     component: ProjectsList,
+  },
+  {
+    path: 'about',
+    component: About,
+  },
+  {
+    path: 'contact',
+    component: Contact,
   },
   {
     path: '**',
