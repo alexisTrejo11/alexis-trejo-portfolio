@@ -4,8 +4,5 @@ import { Component } from '@angular/core';
   selector: 'app-api-explorer',
   imports: [],
   templateUrl: './api-explorer.html',
-  styleUrl: './api-explorer.scss',
 })
-export class ApiExplorer {
-
-}
+export class ApiExplorer {}

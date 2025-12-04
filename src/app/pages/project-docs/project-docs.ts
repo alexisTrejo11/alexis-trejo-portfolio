@@ -1,5 +1,5 @@
 import { CommonModule } from '@angular/common';
-import { Component, OnInit, OnDestroy } from '@angular/core';
+import { Component, OnInit, OnDestroy, inject } from '@angular/core';
 import { ActivatedRoute, RouterModule } from '@angular/router';
 import { Subject, takeUntil } from 'rxjs';
 import { ProjectNavItem } from '../../core/models/project-docts';
@@ -10,6 +10,7 @@ import { ProjectNavItem } from '../../core/models/project-docts';
   templateUrl: './project-docs.html',
 })
 export class ProjectDocs implements OnInit, OnDestroy {
+  private route = inject(ActivatedRoute);
   private destroy$ = new Subject<void>();
 
   projectId: string = '';
@@ -24,11 +25,10 @@ export class ProjectDocs implements OnInit, OnDestroy {
     { label: 'Infrastructure', path: 'infrastructure', icon: '☁️' },
   ];
 
-  constructor(private route: ActivatedRoute) {}
-
   ngOnInit() {
     this.route.params.pipe(takeUntil(this.destroy$)).subscribe((params) => {
       this.projectId = params['projectId'];
+      console.log('Project ID loaded:', this.projectId);
     });
   }
 
@@ -39,9 +39,16 @@ export class ProjectDocs implements OnInit, OnDestroy {
 
   toggleSidebar() {
     this.isSidebarOpen = !this.isSidebarOpen;
+    // Evitar scroll en body cuando sidebar está abierto
+    if (this.isSidebarOpen) {
+      document.body.style.overflow = 'hidden';
+    } else {
+      document.body.style.overflow = '';
+    }
   }
 
   closeSidebar() {
     this.isSidebarOpen = false;
+    document.body.style.overflow = '';
   }
 }

@@ -1,7 +1,7 @@
 import { CommonModule } from '@angular/common';
 import { Component, EventEmitter, input, output } from '@angular/core';
 import { ProjectCard } from '../project-card/project-card';
-import { Project } from '../../../core/models/project-docts';
+import { Project } from '../../../core/models/project';
 
 @Component({
   selector: 'app-projects-grid',

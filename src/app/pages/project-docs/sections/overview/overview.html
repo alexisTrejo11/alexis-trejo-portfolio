@@ -1,34 +1,40 @@
-<div class="max-w-7xl mx-auto px-6 py-12 lg:py-16">
-  <app-project-header [projectData]="projectData" />
-  <div class="my-6 border-t border-gray-200 dark:border-gray-800"></div>
+<div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8 lg:py-12">
+  <!-- Loading State -->
+  @if (isLoading) {
+  <div class="flex justify-center items-center py-20">
+    <div class="animate-spin rounded-full h-12 w-12 border-b-2 border-blue-600"></div>
+  </div>
+  }
 
-  <!-- Problem Statement -->
-  <section class="mb-16">
-    <h2 class="text-2xl font-bold text-gray-900 dark:text-white mb-6">Problem Statement</h2>
-    <div class="prose dark:prose-invert max-w-none">
-      <p class="text-lg text-gray-600 dark:text-gray-400 leading-relaxed mb-4">
-        Traditional monolithic e-commerce systems struggle with scaling during peak traffic periods,
-        leading to degraded performance and lost revenue. The challenge was to build a system that
-        could:
-      </p>
-      <ul class="space-y-3 text-gray-600 dark:text-gray-400">
-        <li class="flex items-start gap-3">
-          <span class="text-blue-600 dark:text-blue-400 font-bold">•</span>
-          <span>Handle 10,000+ concurrent requests with sub-50ms response times</span>
-        </li>
-        <li class="flex items-start gap-3">
-          <span class="text-blue-600 dark:text-blue-400 font-bold">•</span>
-          <span>Scale horizontally during traffic spikes (Black Friday, flash sales)</span>
-        </li>
-        <li class="flex items-start gap-3">
-          <span class="text-blue-600 dark:text-blue-400 font-bold">•</span>
-          <span>Maintain data consistency across distributed services</span>
-        </li>
-        <li class="flex items-start gap-3">
-          <span class="text-blue-600 dark:text-blue-400 font-bold">•</span>
-          <span>Enable independent deployment and scaling of services</span>
-        </li>
-      </ul>
+  <!-- Error State -->
+  @else if (error) {
+  <div class="text-center py-16">
+    <div class="text-red-600 dark:text-red-400 mb-4">
+      <svg class="w-16 h-16 mx-auto" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+        <path
+          stroke-linecap="round"
+          stroke-linejoin="round"
+          stroke-width="2"
+          d="M12 8v4m0 4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"
+        />
+      </svg>
     </div>
-  </section>
+    <h3 class="text-xl font-semibold text-gray-900 dark:text-white mb-2">Unable to load project</h3>
+    <p class="text-gray-600 dark:text-gray-400 mb-6">{{ error }}</p>
+    <button
+      (click)="reload()"
+      class="inline-flex items-center px-4 py-2 bg-blue-600 hover:bg-blue-700 text-white font-medium rounded-lg transition-colors"
+    >
+      Try Again
+    </button>
+  </div>
+  }
+
+  <!-- Success State -->
+  @else if (projectData) {
+  <app-project-header [project]="projectData" />
+  <app-tech-stack-showcase [project]="projectData" />
+  <app-quick-links [project]="projectData" />
+  <app-media-gallery [mediaItems]="projectData.mediaGallery" />
+  }
 </div>

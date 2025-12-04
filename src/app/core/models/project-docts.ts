@@ -1,19 +1,14 @@
-export interface Project {
+export interface ProjectMetric {
+  label: string;
+  value: string;
+  description?: string;
+}
+
+export interface ProjectSection {
   id: string;
   title: string;
-  shortDescription: string;
-  fullDescription: string;
-  category: 'backend' | 'frontend' | 'fullstack' | 'devops';
-  type: 'microservices' | 'api' | 'web-app' | 'mobile' | 'library';
-  status: 'production' | 'development' | 'archived';
-  featured: boolean;
-  year: number;
-  technologies: string[];
-  tags: string[];
-  metrics: ProjectMetric[];
-  links: ProjectLinks;
-  features: string[];
-  images: ProjectImages;
+  content: string;
+  subsections?: ProjectSection[];
 }
 
 export interface ProjectFilters {
@@ -54,15 +49,6 @@ export interface Technology {
   version?: string;
 }
 
-export interface MediaItem {
-  type: 'image' | 'video' | 'document';
-  url: string;
-  thumbnailUrl?: string;
-  title: string;
-  description: string;
-  altText?: string;
-}
-
 export interface QuickLink {
   title: string;
   description: string;
@@ -89,4 +75,47 @@ export interface ProjectNavItem {
   label: string;
   path: string;
   icon: string;
+}
+
+export interface ProjectMediaItem {
+  type: 'image' | 'video';
+  url: string;
+  thumbnail?: string;
+  title: string;
+  description: string;
+  alt?: string;
+  category?: 'screenshot' | 'diagram' | 'demo' | 'architecture';
+}
+
+export interface MediaGallerySection {
+  title: string;
+  description?: string;
+  items: ProjectMediaItem[];
+}
+
+export interface ProjectOverview {
+  problemStatement: OverviewProblemStatement;
+  solution: OverviewSolution;
+  keyMetrics: OverviewKeyMetrics;
+}
+
+export interface OverviewProblemStatement {
+  problemTitle: string;
+  problemDescription: string;
+  problemList: string[];
+}
+
+export interface OverviewSolution {
+  solutionTitle: string;
+  solutionList: Solution[];
+}
+
+export interface Solution {
+  title: string;
+  description: string;
+}
+
+export interface OverviewKeyMetrics {
+  metricsTitle: string;
+  metricsList: string[];
 }

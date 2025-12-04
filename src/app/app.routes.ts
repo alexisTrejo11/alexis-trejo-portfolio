@@ -1,10 +1,15 @@
 import { Routes } from '@angular/router';
 import { Home } from './pages/home/home';
-import { projectDocsRoutes } from './pages/project-docs/project-docs.routes';
 import { ProjectDocs } from './pages/project-docs/project-docs';
 import { ProjectsList } from './pages/projects-list/projects-list';
 import { About } from './pages/about/about';
 import { Contact } from './pages/contact/contact';
+import { Overview } from './pages/project-docs/sections/overview/overview';
+import { CodeShowcase } from './pages/project-docs/sections/code-showcase/code-showcase';
+import { ApiExplorer } from './pages/project-docs/sections/api-explorer/api-explorer';
+import { FeaturedProjects } from './pages/home/components/featured-projects/featured-projects';
+import { Infrastructure } from './pages/project-docs/sections/infrastructure/infrastructure';
+import { ProjectArchitecture } from './pages/project-docs/sections/project-architecture/project-architecture';
 
 export const routes: Routes = [
   {
@@ -12,13 +17,26 @@ export const routes: Routes = [
     component: Home,
   },
   {
-    path: 'projects/:projectId',
-    component: ProjectDocs,
-    children: projectDocsRoutes,
-  },
-  {
     path: 'projects',
-    component: ProjectsList,
+    children: [
+      {
+        path: '',
+        component: ProjectsList,
+      },
+      {
+        path: ':projectId',
+        component: ProjectDocs,
+        children: [
+          { path: 'overview', component: Overview },
+          { path: 'architecture', component: ProjectArchitecture },
+          { path: 'code', component: CodeShowcase },
+          { path: 'api', component: ApiExplorer },
+          { path: 'features', component: FeaturedProjects },
+          { path: 'infrastructure', component: Infrastructure },
+          { path: '', redirectTo: 'overview', pathMatch: 'full' },
+        ],
+      },
+    ],
   },
   {
     path: 'about',

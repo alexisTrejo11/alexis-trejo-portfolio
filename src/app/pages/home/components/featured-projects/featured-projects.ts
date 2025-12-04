@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 import { RouterModule } from '@angular/router';
 import { ProjectsGrid } from '../../../../shared/components/projects-grid/projects-grid';
-import { Project } from '../../../../core/models/project-docts';
+import { Project } from '../../../../core/models/project';
 import { ProjectsService } from '../../../../services/projects.service';
 import { catchError, map, of } from 'rxjs';
 

@@ -1,1 +1,140 @@
-<p>quick-links works!</p>
+<!-- quick-links.component.html -->
+<section class="mb-16">
+  <div class="flex items-center justify-between mb-8">
+    <div>
+      <h2 class="text-3xl font-bold text-gray-900 dark:text-white mb-2">Quick Access</h2>
+      <p class="text-gray-600 dark:text-gray-400">Direct links to resources and documentation</p>
+    </div>
+    <div class="text-sm text-gray-500 dark:text-gray-400">
+      <span class="font-medium">{{ getLinks().length }}</span> resources available
+    </div>
+  </div>
+
+  <!-- Links Grid -->
+  <div class="grid md:grid-cols-2 gap-6">
+    @for (link of getLinks(); track link.title) {
+    <a
+      [href]="link.url"
+      [target]="link.external ? '_blank' : '_self'"
+      [rel]="link.external ? 'noopener noreferrer' : ''"
+      [attr.aria-label]="link.title + ' - ' + getExternalText(link.external)"
+      [ngClass]="getBorderColor(link.type)"
+      class="group block p-6 bg-white dark:bg-gray-900 rounded-xl border-2 transition-all duration-300 hover:shadow-xl hover:translate-y-[-2px]"
+    >
+      <div class="flex items-start gap-5">
+        <!-- Icon Container -->
+        <div class="flex-shrink-0">
+          <div
+            class="w-14 h-14 rounded-xl bg-gray-100 dark:bg-gray-800 flex items-center justify-center group-hover:scale-110 transition-transform duration-300"
+          >
+            <span class="text-2xl" [ngClass]="link.iconColor">
+              {{ getLinkIcon(link.type) }}
+            </span>
+          </div>
+        </div>
+
+        <!-- Content -->
+        <div class="flex-1 min-w-0">
+          <div class="flex items-start justify-between mb-3">
+            <div>
+              <h3
+                class="text-lg font-bold text-gray-900 dark:text-white group-hover:text-emerald-700 dark:group-hover:text-emerald-300 transition-colors"
+              >
+                {{ link.title }}
+              </h3>
+              @if (link.badge) {
+              <span
+                class="inline-block mt-1 px-2 py-0.5 text-xs bg-gray-100 dark:bg-gray-800 text-gray-700 dark:text-gray-300 rounded"
+              >
+                {{ link.badge }}
+              </span>
+              }
+            </div>
+
+            <!-- External Indicator -->
+            @if (link.external) {
+            <svg
+              class="w-5 h-5 text-gray-400 group-hover:text-gray-600 dark:group-hover:text-gray-300 transition-colors flex-shrink-0"
+              fill="none"
+              stroke="currentColor"
+              viewBox="0 0 24 24"
+            >
+              <path
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                stroke-width="2"
+                d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"
+              />
+            </svg>
+            }
+          </div>
+
+          <p class="text-sm text-gray-600 dark:text-gray-400 mb-4">
+            {{ link.description }}
+          </p>
+
+          <!-- URL Preview -->
+          <div class="flex items-center gap-2 text-xs text-gray-500 dark:text-gray-500">
+            <span class="truncate max-w-[200px]">
+              {{ link.url.replace('https://', '').replace('http://', '') }}
+            </span>
+            <span class="px-1.5 py-0.5 bg-gray-100 dark:bg-gray-800 rounded text-[10px]">
+              {{ link.external ? 'External' : 'Internal' }}
+            </span>
+          </div>
+        </div>
+
+        <!-- Arrow -->
+        <svg
+          class="w-5 h-5 text-gray-400 group-hover:text-emerald-600 dark:group-hover:text-emerald-400 transform group-hover:translate-x-1 transition-all flex-shrink-0 mt-1"
+          fill="none"
+          stroke="currentColor"
+          viewBox="0 0 24 24"
+        >
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" />
+        </svg>
+      </div>
+    </a>
+    }
+  </div>
+
+  <!-- Mensaje si no hay links -->
+  @if (getLinks().length === 0) {
+  <div
+    class="text-center py-12 bg-gradient-to-br from-gray-50 to-white dark:from-gray-900 dark:to-gray-800 rounded-xl border border-gray-200 dark:border-gray-800"
+  >
+    <div class="text-4xl mb-4 text-gray-300 dark:text-gray-700">🔗</div>
+    <h3 class="text-xl font-semibold text-gray-900 dark:text-white mb-2">No links available</h3>
+    <p class="text-gray-600 dark:text-gray-400 max-w-md mx-auto">
+      Project links and resources will be added here.
+    </p>
+  </div>
+  }
+
+  <!-- Additional Resources Note -->
+  @if (getLinks().length > 0) {
+  <div
+    class="mt-8 p-4 bg-blue-50 dark:bg-blue-900/20 rounded-lg border border-blue-200 dark:border-blue-800"
+  >
+    <div class="flex items-start gap-3">
+      <svg
+        class="w-5 h-5 text-blue-600 dark:text-blue-400 flex-shrink-0 mt-0.5"
+        fill="none"
+        stroke="currentColor"
+        viewBox="0 0 24 24"
+      >
+        <path
+          stroke-linecap="round"
+          stroke-linejoin="round"
+          stroke-width="2"
+          d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"
+        />
+      </svg>
+      <div class="text-sm text-blue-700 dark:text-blue-300">
+        <span class="font-medium">Tip:</span> These links provide quick access to the most important
+        project resources. All external links open in new tabs for your convenience.
+      </div>
+    </div>
+  </div>
+  }
+</section>

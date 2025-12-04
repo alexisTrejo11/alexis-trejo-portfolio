@@ -3,8 +3,8 @@ import { Component, OnInit } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { RouterModule } from '@angular/router';
 import { ProjectsGrid } from '../../shared/components/projects-grid/projects-grid';
-import { Project } from '../../core/models/project-docts';
 import { ProjectsService } from '../../services/projects.service';
+import { Project } from '../../core/models/project';
 
 @Component({
   selector: 'app-projects-list',

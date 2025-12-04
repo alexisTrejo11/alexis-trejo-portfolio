@@ -1,7 +1,8 @@
 import { Component, input } from '@angular/core';
-import { Project, ProjectCategory } from '../../../core/models/project-docts';
+import { ProjectCategory } from '../../../core/models/project-docts';
 import { CommonModule } from '@angular/common';
 import { RouterLink } from '@angular/router';
+import { Project } from '../../../core/models/project';
 
 @Component({
   selector: 'app-project-card',
