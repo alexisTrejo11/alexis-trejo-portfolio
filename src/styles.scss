@@ -6,6 +6,7 @@
 @tailwind components;
 @tailwind utilities;
 
+
 /* ============================================
    CUSTOM CSS VARIABLES & GRADIENTS
    ============================================ */
@@ -381,3 +382,16 @@
 * {
   transition: background-color 0.3s ease, border-color 0.3s ease, color 0.3s ease;
 }
+
+
+
+@import 'prismjs/themes/prism-tomorrow.css';
+/* @import 'prismjs/themes/prism-okaidia.css'; */
+/* @import 'prismjs/themes/prism-twilight.css'; */
+
+@import 'prismjs/plugins/line-highlight/prism-line-highlight.css';
+@import 'prismjs/plugins/line-numbers/prism-line-numbers.css';
+@import 'prismjs/plugins/toolbar/prism-toolbar.css';
+
+
+@import './prism/prism-custom.scss';
