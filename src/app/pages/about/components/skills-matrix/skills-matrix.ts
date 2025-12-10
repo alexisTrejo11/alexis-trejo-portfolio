@@ -3,7 +3,7 @@ import { Component } from '@angular/core';
 
 interface SkillCategory {
   name: string;
-  icon: string;
+  iconPath: string;
   description: string;
   skills: Skill[];
 }
@@ -28,7 +28,7 @@ export class SkillsMatrix {
   categories: SkillCategory[] = [
     {
       name: 'Frontend Development',
-      icon: '🎨',
+      iconPath: 'icons/general/screen.svg',
       description: 'Building interfaces and user experiences',
       skills: [
         {
@@ -55,7 +55,7 @@ export class SkillsMatrix {
     },
     {
       name: 'Backend & APIs',
-      icon: '⚙️',
+      iconPath: 'icons/general/gear.svg',
       description: 'Server logic, databases, and communication',
       skills: [
         {
@@ -82,7 +82,7 @@ export class SkillsMatrix {
     },
     {
       name: 'Architecture & Systems',
-      icon: '🏗️',
+      iconPath: 'icons/general/infrastructure.svg',
       description: 'Design and structure of software solutions',
       skills: [
         {
@@ -109,7 +109,7 @@ export class SkillsMatrix {
     },
     {
       name: 'Tools & Methodologies',
-      icon: '🛠️',
+      iconPath: 'icons/general/binary.svg',
       description: 'Workflows and development practices',
       skills: [
         {

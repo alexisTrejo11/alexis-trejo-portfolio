@@ -7,7 +7,7 @@
       <div
         class="inline-flex items-center justify-center w-16 h-16 rounded-full bg-gradient-to-r from-blue-600 to-cyan-600 mb-6"
       >
-        <span class="text-2xl">⚙️</span>
+        <img src="icons/general/code.svg" alt="Screen" class="w-11 h-11" />
       </div>
       <h2 class="text-4xl font-bold text-gray-900 dark:text-white mb-4">
         Engineering Mindset, Not Just Code
@@ -36,21 +36,13 @@
         <!-- Content Container -->
         <div class="relative p-8 bg-white/90 dark:bg-gray-900/90 backdrop-blur-sm h-full">
           <!-- Icon with Gradient Border -->
-          <div
-            class="inline-flex items-center justify-center w-16 h-16 rounded-2xl border-4 border-white dark:border-gray-800 mb-6 relative"
-          >
-            <div class="text-3xl">{{ philosophy.icon }}</div>
-            <div
-              [class]="
-                'absolute -inset-0.5 bg-gradient-to-br ' +
-                philosophy.color +
-                ' rounded-2xl blur opacity-0 group-hover:opacity-30 transition-opacity duration-500'
-              "
-            ></div>
-          </div>
-
+          <img
+            src="{{ philosophy.iconPath }}"
+            alt="{{ philosophy.title }}"
+            class="w-10 h-10 z-10 filter dark:invert dark:brightness-200 dark:hue-rotate-180"
+          />
           <!-- Title -->
-          <h3 class="text-2xl font-bold text-gray-900 dark:text-white mb-4">
+          <h3 class="text-2xl font-bold text-gray-900 dark:text-white mb-4 pt-4">
             {{ philosophy.title }}
           </h3>
 

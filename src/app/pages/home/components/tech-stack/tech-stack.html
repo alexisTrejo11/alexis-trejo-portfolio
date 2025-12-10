@@ -66,7 +66,6 @@
           "
           class="px-5 py-3 rounded-xl transition-all duration-300 hover:scale-105 font-medium flex items-center gap-2"
         >
-          <span>🌐</span>
           <span>All</span>
           <span class="text-xs opacity-75">({{ statistics?.total || 0 }})</span>
         </button>
@@ -131,7 +130,11 @@
           <!-- Icon & Header -->
           <div class="flex items-start justify-between mb-4">
             <div class="text-4xl mb-2">
-              {{ tech.icon }}
+              <img
+                src="{{ tech.iconPath }}"
+                alt="{{ tech.name }}"
+                class="w-12 h-12 filter dark:invert dark:brightness-200 dark:hue-rotate-180"
+              />
             </div>
 
             <!-- Level Badge -->

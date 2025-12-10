@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { PERSONAL_DATA } from '../../../../core/constants/personal-data';
 
 interface ContactMethod {
   icon: string;
@@ -25,8 +26,14 @@ interface ContactMethod {
           rel="noopener noreferrer"
           class="flex items-start gap-4 p-4 rounded-lg border-2 border-gray-200 dark:border-gray-800 hover:border-blue-600 dark:hover:border-blue-400 transition-all duration-300 group"
         >
-          <div class="text-4xl transform group-hover:scale-110 transition-transform">
-            {{ method.icon }}
+          <div
+            class="text-4xl transform group-hover:scale-110 transition-transform bg-gray-200 dark:bg-gray-400 p-3 rounded-full"
+          >
+            <img
+              [alt]="method.title"
+              [src]="'icons/general/' + method.title.toLowerCase() + '.svg'"
+              class="w-10 h-10 "
+            />
           </div>
           <div class="flex-1">
             <h3 class="font-bold text-gray-900 dark:text-white mb-1">
@@ -62,7 +69,7 @@ interface ContactMethod {
       class="card p-8 bg-gradient-to-br from-green-50 to-teal-50 dark:from-green-900/20 dark:to-teal-900/20 border-2 border-green-200 dark:border-green-800"
     >
       <div class="flex items-start gap-4">
-        <div class="text-4xl">✅</div>
+        <img src="icons/general/check.svg" alt="Availability" class="w-12 h-12 mt-1" />
         <div>
           <h3 class="text-xl font-bold text-gray-900 dark:text-white mb-2">Currently Available</h3>
           <p class="text-gray-600 dark:text-gray-400 mb-4">
@@ -81,7 +88,7 @@ interface ContactMethod {
 
     <!-- Location & Timezone -->
     <div class="card p-8">
-      <h3 class="font-bold text-gray-900 dark:text-white mb-4">📍 Location & Availability</h3>
+      <h3 class="font-bold text-gray-900 dark:text-white mb-4">Location & Availability</h3>
       <div class="space-y-3 text-gray-600 dark:text-gray-400">
         <p class="flex items-center gap-2">
           <span class="font-semibold">Based in:</span>
@@ -102,31 +109,31 @@ interface ContactMethod {
 export class ContactInfo {
   contactMethods: ContactMethod[] = [
     {
-      icon: '📧',
+      icon: 'email',
       title: 'Email',
-      value: 'marcoalexispt.02@gmail.com',
-      link: 'mailto:marcoalexispt.02@gmail.com',
+      value: PERSONAL_DATA.email,
+      link: `mailto:${PERSONAL_DATA.email}`,
       description: 'Best for detailed project discussions',
     },
     {
-      icon: '💼',
+      icon: 'linkedin',
       title: 'LinkedIn',
-      value: '/in/alexis-trejo-079494298',
-      link: 'https://linkedin.com/in/alexis-trejo-079494298',
+      value: PERSONAL_DATA.linkedin.substring(PERSONAL_DATA.linkedin.lastIndexOf('/') + 1),
+      link: PERSONAL_DATA.linkedin,
       description: "Let's connect professionally",
     },
     {
-      icon: '💻',
+      icon: 'github',
       title: 'GitHub',
-      value: '@alexisTrejo11',
-      link: 'https://github.com/alexisTrejo11',
+      value: `@${PERSONAL_DATA.github.substring(PERSONAL_DATA.github.lastIndexOf('/') + 1)}`,
+      link: PERSONAL_DATA.github,
       description: 'Check out my open source work',
     },
     {
-      icon: '📱',
+      icon: 'x',
       title: 'X',
-      value: '@TReyna5079',
-      link: 'https://x.com/TReyna50792',
+      value: `@${PERSONAL_DATA.x.substring(PERSONAL_DATA.x.lastIndexOf('/') + 1)}`,
+      link: PERSONAL_DATA.x,
       description: 'Follow for tech insights',
     },
   ];

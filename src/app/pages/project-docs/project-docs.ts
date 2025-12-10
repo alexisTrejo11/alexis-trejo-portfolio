@@ -17,12 +17,16 @@ export class ProjectDocs implements OnInit, OnDestroy {
   isSidebarOpen = false;
 
   navItems: ProjectNavItem[] = [
-    { label: 'Overview', path: 'overview', icon: '📋' },
-    { label: 'Architecture', path: 'architecture', icon: '🏗️' },
-    { label: 'Code Showcase', path: 'code', icon: '💻' },
-    { label: 'API Explorer', path: 'api', icon: '🔌' },
-    { label: 'Features', path: 'features', icon: '✨' },
-    { label: 'Infrastructure', path: 'infrastructure', icon: '☁️' },
+    { label: 'Overview', path: 'overview', iconPath: 'icons/general/overview.svg' },
+    { label: 'Architecture', path: 'architecture', iconPath: 'icons/general/architecture.svg' },
+    { label: 'Code Showcase', path: 'code', iconPath: 'icons/general/code.svg' },
+    { label: 'API Explorer', path: 'api', iconPath: 'icons/general/api.svg' },
+    { label: 'Features', path: 'features', iconPath: 'icons/general/features.svg' },
+    {
+      label: 'Infrastructure',
+      path: 'infrastructure',
+      iconPath: 'icons/tech/backend/tools.svg',
+    },
   ];
 
   ngOnInit() {

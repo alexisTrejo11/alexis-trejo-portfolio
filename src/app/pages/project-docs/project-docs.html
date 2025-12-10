@@ -78,7 +78,11 @@
           (click)="closeSidebar()"
           class="flex items-center gap-3 px-4 py-3 rounded-lg text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-800 transition-colors duration-200 font-medium"
         >
-          <span class="text-xl">{{ item.icon }}</span>
+          <img
+            [src]="item.iconPath"
+            alt="{{ item.label }} Icon"
+            class="w-6 h-6 filter dark:invert dark:brightness-200 dark:hue-rotate-180"
+          />
           <span>{{ item.label }}</span>
         </a>
         }

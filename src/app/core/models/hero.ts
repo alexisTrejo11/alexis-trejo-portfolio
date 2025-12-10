@@ -2,7 +2,7 @@ export interface Technology {
   id: string;
   name: string;
   category: TechCategory;
-  icon: string;
+  iconPath: string;
   color: string;
   level: 'expert' | 'advanced' | 'intermediate' | 'beginner';
   description?: string;
@@ -24,7 +24,7 @@ export interface TechCategoryInfo {
   id: TechCategory;
   name: string;
   description: string;
-  icon: string;
+  iconPath: string;
   color: string;
   count: number;
 }
@@ -32,7 +32,7 @@ export interface TechCategoryInfo {
 export interface Expertise {
   title: string;
   description: string;
-  icon: string;
+  iconName: string;
   skills: string[];
 }
 

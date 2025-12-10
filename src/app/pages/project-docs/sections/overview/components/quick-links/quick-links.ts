@@ -123,16 +123,16 @@ export class QuickLinks {
   }
 
   // Icon based on link type
-  getLinkIcon(type: QuickLink['type']): string {
+  getIconPath(type: QuickLink['type']): string {
     const icons = {
-      github: '💻',
-      demo: '🚀',
-      docs: '📚',
-      architecture: '🏗️',
-      api: '🔌',
-      deployment: '🐳',
+      github: 'icons/general/github.svg',
+      demo: 'icons/general/demo.svg',
+      docs: 'icons/general/docs.svg',
+      architecture: 'icons/general/architecture.svg',
+      api: 'icons/general/api.svg',
+      deployment: 'icons/tech/docker.svg',
     };
-    return icons[type] || '🔗';
+    return icons[type] || 'icons/general/docs.svg';
   }
 
   getBorderColor(type: QuickLink['type']): string {

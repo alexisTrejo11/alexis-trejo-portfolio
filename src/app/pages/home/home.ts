@@ -9,6 +9,13 @@ import { CtaSection } from './components/cta-section/cta-section';
 @Component({
   selector: 'app-home',
   imports: [Hero, TechStack, FeaturedProjects, BackendExpertise, QuickStats, CtaSection],
-  templateUrl: './home.html',
+  template: `<div class="min-h-screen bg-white dark:bg-gray-950">
+    <app-hero />
+    <app-tech-stack />
+    <app-featured-projects />
+    <app-backend-expertise />
+    <app-quick-stats />
+    <app-cta-section />
+  </div> `,
 })
 export class Home {}

@@ -5,6 +5,8 @@ import { ContactInfo } from './components/contact-info/contact-info';
 @Component({
   selector: 'app-contact',
   imports: [ContactForm, ContactInfo],
-  template: `<app-contact-form /> <app-contact-info /> `,
+  template: `
+    <div class="mb-12 px-24 flex flex-col gap-20 "><app-contact-form /> <app-contact-info /></div>
+  `,
 })
 export class Contact {}

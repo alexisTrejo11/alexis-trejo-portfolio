@@ -45,7 +45,7 @@ export interface Technology {
   name: string;
   category: string;
   usage: string;
-  icon: string;
+  iconPath: string;
   version?: string;
 }
 
@@ -53,7 +53,7 @@ export interface QuickLink {
   title: string;
   description: string;
   url: string;
-  icon: string;
+  iconPath: string;
   color: string;
   external: boolean;
 }
@@ -74,7 +74,7 @@ export interface ProjectSection {
 export interface ProjectNavItem {
   label: string;
   path: string;
-  icon: string;
+  iconPath: string;
 }
 
 export interface ProjectMediaItem {
