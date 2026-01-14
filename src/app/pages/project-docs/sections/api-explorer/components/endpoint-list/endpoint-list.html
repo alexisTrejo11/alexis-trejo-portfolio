@@ -1,0 +1,53 @@
+<div class="card sticky top-4">
+  <div class="p-4 border-b border-gray-200 dark:border-gray-800">
+    <h2 class="font-bold text-gray-900 dark:text-white">Endpoints</h2>
+    <p class="text-sm text-gray-500 dark:text-gray-400 mt-1">
+      {{ endpoints().length }} endpoints
+    </p>
+  </div>
+
+  <div class="p-2 space-y-2 max-h-[calc(100vh-200px)] overflow-y-auto custom-scrollbar">
+    @for (endpoint of endpoints(); track endpoint.id) {
+      <button
+        (click)="selectEndpoint(endpoint)"
+        [class.bg-blue-50]="selectedEndpoint()?.id === endpoint.id"
+        [class.dark:bg-blue-900/20]="selectedEndpoint()?.id === endpoint.id"
+        [class.border-blue-600]="selectedEndpoint()?.id === endpoint.id"
+        [class.dark:border-blue-400]="selectedEndpoint()?.id === endpoint.id"
+        class="w-full text-left p-4 rounded-lg border border-transparent hover:bg-gray-50 dark:hover:bg-gray-900 transition-all group"
+      >
+        <div class="flex items-center gap-2 mb-2">
+          <span [ngClass]="getMethodColor(endpoint.method)" class="badge text-xs font-bold">
+            {{ endpoint.method }}
+          </span>
+
+          @if (endpoint.authenticated) {
+            <span class="badge badge-gray text-xs" title="Requires authentication">
+              🔒
+            </span>
+          }
+        </div>
+
+        <div class="font-mono text-sm text-gray-900 dark:text-white mb-2 break-all">
+          {{ endpoint.path }}
+        </div>
+
+        <p class="text-xs text-gray-600 dark:text-gray-400 line-clamp-2">
+          {{ endpoint.summary }}
+        </p>
+
+        <div class="flex flex-wrap gap-1 mt-2">
+          @for (tag of endpoint.tags; track tag) {
+            <span class="text-xs px-2 py-1 bg-gray-100 dark:bg-gray-800 text-gray-600 dark:text-gray-400 rounded">
+              {{ tag }}
+            </span>
+          }
+        </div>
+      </button>
+    } @empty {
+      <div class="p-4 text-center text-gray-500">
+        No se encontraron endpoints.
+      </div>
+    }
+  </div>
+</div>

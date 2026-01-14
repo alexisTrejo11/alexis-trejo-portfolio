@@ -1,0 +1,35 @@
+<div class="card p-8">
+  <h3 class="text-xl font-bold text-gray-900 dark:text-white mb-6">
+    {{ title }}
+  </h3>
+
+  <div class="space-y-3">
+    <div
+      *ngFor="let key of getPropertyKeys()"
+      class="p-4 bg-gray-50 dark:bg-gray-900 rounded-lg border border-gray-200 dark:border-gray-800"
+    >
+      <div class="flex items-start justify-between">
+        <div class="flex-1">
+          <div class="flex items-center gap-2 mb-1">
+            <span class="font-mono font-semibold text-gray-900 dark:text-white">
+              {{ key }}
+            </span>
+            @if (isRequired(key)) {
+            <span class="badge badge-error text-xs">Required</span>
+            }
+          </div>
+          <div class="flex items-center gap-2">
+            <span class="text-sm text-blue-600 dark:text-blue-400 font-mono">
+              {{ getPropertyType(key) }}
+            </span>
+            @if (getPropertyDescription(key)) {
+            <span class="text-xs text-gray-500 dark:text-gray-400">
+              • {{ getPropertyDescription(key) }}
+            </span>
+            }
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

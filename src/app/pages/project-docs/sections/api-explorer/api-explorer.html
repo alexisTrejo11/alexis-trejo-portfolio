@@ -1,1 +1,89 @@
-<p>api-explorer works!</p>
+<div class="max-w-7xl mx-auto px-6 py-12 lg:py-16">
+  <!-- Header -->
+  <header class="mb-12">
+    <h1 class="section-title">API Documentation</h1>
+    <p class="section-subtitle">Interactive API reference with live examples and request builder</p>
+  </header>
+
+  <!-- API Info Card -->
+  <div
+    class="card p-8 mb-8 bg-gradient-to-br from-blue-50 to-purple-50 dark:from-blue-900/20 dark:to-purple-900/20"
+  >
+    <div class="grid md:grid-cols-4 gap-6">
+      <div>
+        <div class="text-sm text-gray-600 dark:text-gray-400 mb-1">Base URL</div>
+        <div class="font-mono text-sm text-gray-900 dark:text-white">https://api.example.com</div>
+      </div>
+      <div>
+        <div class="text-sm text-gray-600 dark:text-gray-400 mb-1">Version</div>
+        <div class="font-semibold text-gray-900 dark:text-white">v1.0.0</div>
+      </div>
+      <div>
+        <div class="text-sm text-gray-600 dark:text-gray-400 mb-1">Auth Type</div>
+        <div class="font-semibold text-gray-900 dark:text-white">JWT Bearer</div>
+      </div>
+      <div>
+        <div class="text-sm text-gray-600 dark:text-gray-400 mb-1">Content Type</div>
+        <div class="font-semibold text-gray-900 dark:text-white">application/json</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Tags Filter -->
+  <div class="flex flex-wrap gap-3 mb-8">
+    <button
+      *ngFor="let tag of tags"
+      (click)="selectTag(tag)"
+      [class.badge-primary]="selectedTag === tag"
+      [class.badge-gray]="selectedTag !== tag"
+      class="badge cursor-pointer hover:scale-105 transition-transform"
+    >
+      {{ tag }}
+    </button>
+  </div>
+
+  <!-- Main Layout: 2-Column -->
+  <div class="grid lg:grid-cols-12 gap-8">
+    <!-- Left: Endpoint List -->
+    <aside class="lg:col-span-4">
+      <app-endpoint-list
+        [endpoints]="filteredEndpoints"
+        [selectedEndpoint]="selectedEndpoint"
+        (endpointSelected)="selectEndpoint($event)"
+      />
+    </aside>
+
+    <!-- Right: Endpoint Details -->
+    <main class="lg:col-span-8">
+      @if (selectedEndpoint) {
+      <div class="space-y-6">
+        <!-- Endpoint Detail -->
+        <app-endpoint-detail [endpoint]="selectedEndpoint" />
+
+        <!-- Schema Visualizer (if has request body) -->
+        @if (selectedEndpoint.requestBody) {
+        <app-schema-visualizer
+          [schema]="selectedEndpoint.requestBody.schema"
+          [title]="'Request Body Schema'"
+        />
+        }
+
+        <!-- Request Builder -->
+        <app-request-builder [endpoint]="selectedEndpoint" />
+
+        <!-- Response Examples -->
+        <app-response-viewer [responses]="selectedEndpoint.responses" />
+      </div>
+      } @else {
+      <!-- Empty State -->
+      <div class="card p-12 text-center">
+        <div class="text-6xl mb-4">📚</div>
+        <h3 class="text-xl font-bold text-gray-900 dark:text-white mb-2">Select an Endpoint</h3>
+        <p class="text-gray-600 dark:text-gray-400">
+          Choose an endpoint from the list to view details
+        </p>
+      </div>
+      }
+    </main>
+  </div>
+</div>

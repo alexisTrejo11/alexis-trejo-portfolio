@@ -4,8 +4,8 @@
   </h2>
 
   <div class="space-y-4">
+    @for (decision of decisions; track decision.title) {
     <div
-      *ngFor="let decision of decisions"
       class="card transition-all duration-300"
       [class.ring-2]="selectedDecision === decision"
       [class.ring-blue-600]="selectedDecision === decision"
@@ -41,7 +41,8 @@
       </button>
 
       <!-- Decision Details (Expandable) -->
-      <div *ngIf="selectedDecision === decision" class="px-6 pb-6 space-y-6 animate-slide-down">
+      @if (selectedDecision === decision) {
+      <div class="px-6 pb-6 space-y-6 animate-slide-down">
         <!-- Problem -->
         <div>
           <h4 class="font-bold text-gray-900 dark:text-white mb-2 flex items-center gap-2">
@@ -71,9 +72,11 @@
             Alternatives Considered
           </h4>
           <div class="flex flex-wrap gap-2 pl-7">
-            <span *ngFor="let alt of decision.alternatives" class="badge badge-gray">
+            @for (alt of decision.alternatives; track alt) {
+            <span class="badge badge-gray">
               {{ alt }}
             </span>
+            }
           </div>
         </div>
 
@@ -90,6 +93,8 @@
           </p>
         </div>
       </div>
+      }
     </div>
+    }
   </div>
 </section>

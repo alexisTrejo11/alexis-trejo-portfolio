@@ -1,0 +1,161 @@
+<div class="card p-8">
+  <h3 class="text-xl font-bold text-gray-900 dark:text-white mb-6">Try It Out</h3>
+
+  <!-- Auth Token -->
+  @if (endpoint().authenticated) {
+  <div class="mb-6">
+    <label class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
+      Authorization Token
+    </label>
+    <input
+      type="text"
+      [(ngModel)]="authToken"
+      placeholder="Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9..."
+      class="input font-mono text-sm"
+    />
+    <p class="text-xs text-gray-500 dark:text-gray-400 mt-1">
+      Enter your JWT token for authentication
+    </p>
+  </div>
+  }
+
+  <!-- Parameters -->
+  @if (endpoint().parameters && endpoint().parameters?.length) {
+  <div class="mb-6">
+    <h4 class="font-bold text-gray-900 dark:text-white mb-4">Parameters</h4>
+    <div class="space-y-4">
+      <div *ngFor="let param of endpoint().parameters">
+        <label class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
+          {{ param.name }}
+          @if (param.required) {
+          <span class="text-red-500">*</span>
+          }
+          <span class="text-gray-500 font-normal">({{ param.in }})</span>
+        </label>
+        <input
+          type="text"
+          [(ngModel)]="parameterValues[param.name]"
+          [placeholder]="param.example?.toString() || param.description"
+          class="input font-mono text-sm"
+        />
+      </div>
+    </div>
+
+    <!-- Request Body Editor -->
+    <div *ngIf="endpoint().requestBody" class="mb-6">
+      <h4 class="font-bold text-gray-900 dark:text-white mb-4">Request Body</h4>
+      <textarea
+        [(ngModel)]="requestBody"
+        rows="10"
+        class="input font-mono text-sm resize-none"
+      ></textarea>
+    </div>
+
+    <!-- Request Body Editor -->
+    @if (endpoint().requestBody) {
+    <div class="mb-6">
+      <h4 class="font-bold text-gray-900 dark:text-white mb-4">Request Body</h4>
+      <textarea
+        [(ngModel)]="requestBody"
+        rows="10"
+        class="input font-mono text-sm resize-none"
+      ></textarea>
+    </div>
+    }
+  </div>
+  }
+
+  <!-- Request URL Preview -->
+  <div class="mb-6 p-4 bg-gray-50 dark:bg-gray-900 rounded-lg">
+    <div class="flex items-center justify-between mb-2">
+      <span class="text-sm font-medium text-gray-700 dark:text-gray-300">Request URL</span>
+      <button (click)="copyToClipboard(fullUrl)" class="btn-icon text-gray-500" title="Copy URL">
+        <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path
+            stroke-linecap="round"
+            stroke-linejoin="round"
+            stroke-width="2"
+            d="M8 16H6a2 2 0 01-2-2V6a2 2 0 012-2h8a2 2 0 012 2v2m-6 12h8a2 2 0 002-2v-8a2 2 0 00-2-2h-8a2 2 0 00-2 2v8a2 2 0 002 2z"
+          />
+        </svg>
+      </button>
+    </div>
+    <code class="text-sm text-gray-600 dark:text-gray-400 break-all">
+      {{ fullUrl }}
+    </code>
+  </div>
+  <!-- Send Button -->
+  <button (click)="sendRequest()" [disabled]="isLoading" class="w-full btn-primary">
+    @if (!isLoading) {
+    <span>Send Request</span>
+    } @if (isLoading) {
+    <span class="flex items-center justify-center gap-2">
+      <svg class="animate-spin w-5 h-5" fill="none" viewBox="0 0 24 24">
+        <circle
+          class="opacity-25"
+          cx="12"
+          cy="12"
+          r="10"
+          stroke="currentColor"
+          stroke-width="4"
+        ></circle>
+        <path
+          class="opacity-75"
+          fill="currentColor"
+          d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"
+        ></path>
+      </svg>
+      Sending...
+    </span>
+    }
+  </button>
+  <!-- Response -->
+  @if (response || error) {
+  <div class="mt-6">
+    <h4 class="font-bold text-gray-900 dark:text-white mb-4">Response</h4>
+    <!-- Success Response -->
+    @if (response) {
+    <div class="code-block">
+      <div class="code-header">
+        <div class="flex items-center gap-2">
+          <span
+            [class.text-green-400]="response.status < 300"
+            [class.text-red-400]="response.status >= 400"
+          >
+            {{ response.status }} {{ response.statusText }}
+          </span>
+        </div>
+      </div>
+      <pre class="code-content"><code>{{ response.data | json }}</code></pre>
+    </div>
+    }
+
+    <!-- Error Response -->
+    @if (error) {
+    <div
+      class="p-4 bg-red-50 dark:bg-red-900/20 border border-red-200 dark:border-red-800 rounded-lg"
+    >
+      <div class="flex items-start gap-3">
+        <svg
+          class="w-5 h-5 text-red-600 dark:text-red-400 flex-shrink-0"
+          fill="none"
+          stroke="currentColor"
+          viewBox="0 0 24 24"
+        >
+          <path
+            stroke-linecap="round"
+            stroke-linejoin="round"
+            stroke-width="2"
+            d="M12 8v4m0 4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"
+          />
+        </svg>
+        <div>
+          <h5 class="font-bold text-red-900 dark:text-red-100 mb-1">Error</h5>
+          <p class="text-sm text-red-700 dark:text-red-300">{{ error }}</p>
+        </div>
+      </div>
+    </div>
+    }
+  </div>
+  }
+</div>
