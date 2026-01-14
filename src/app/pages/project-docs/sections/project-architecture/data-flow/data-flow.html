@@ -1,0 +1,110 @@
+<!-- data-flow.component.html -->
+<section class="mb-16">
+  <h2 class="text-2xl font-bold text-gray-900 dark:text-white mb-8">System Architecture Flow</h2>
+
+  <!-- Request Flow - Diagrama Horizontal -->
+  <div class="mb-16">
+    <div class="flex items-center justify-between mb-6">
+      <h3 class="text-xl font-bold text-gray-900 dark:text-white">Request Flow</h3>
+      <span
+        class="px-3 py-1 text-sm font-medium bg-blue-100 text-blue-800 dark:bg-blue-900 dark:text-blue-200 rounded-full"
+      >
+        Synchronous
+      </span>
+    </div>
+
+    <div class="relative">
+      <!-- Línea de conexión horizontal -->
+      <div
+        class="hidden md:block absolute left-0 right-0 top-1/2 h-0.5 bg-gradient-to-r from-blue-600 via-blue-400 to-purple-600 dark:from-blue-500 dark:via-blue-300 dark:to-purple-500 -translate-y-1/2"
+      ></div>
+
+      <div class="grid grid-cols-1 md:grid-cols-6 gap-4">
+        <div *ngFor="let step of requestFlow" class="relative">
+          <!-- Step Card -->
+          <div class="card p-4 h-full">
+            <div class="flex flex-col items-center text-center">
+              <!-- Número con indicador de conexión -->
+              <div class="relative mb-4">
+                <div
+                  class="w-10 h-10 bg-gradient-to-br from-blue-600 to-purple-600 rounded-full flex items-center justify-center text-white font-bold text-lg shadow-lg"
+                >
+                  {{ step.number }}
+                </div>
+                <!-- Flecha móvil -->
+                <div
+                  *ngIf="step.number < requestFlow.length"
+                  class="hidden md:block absolute -right-5 top-1/2 text-blue-600 dark:text-blue-400"
+                >
+                  →
+                </div>
+              </div>
+
+              <!-- Icono y título -->
+              <div class="text-2xl mb-2">{{ step.icon }}</div>
+              <h4 class="font-bold text-gray-900 dark:text-white mb-2 text-sm">
+                {{ step.title }}
+              </h4>
+              <p class="text-gray-600 dark:text-gray-400 text-xs">
+                {{ step.description }}
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Event Flow - Diagrama Horizontal -->
+  <div>
+    <div class="flex items-center justify-between mb-6">
+      <h3 class="text-xl font-bold text-gray-900 dark:text-white">Event Flow</h3>
+      <span
+        class="px-3 py-1 text-sm font-medium bg-pink-100 text-pink-800 dark:bg-pink-900 dark:text-pink-200 rounded-full"
+      >
+        Asynchronous
+      </span>
+    </div>
+
+    <div class="relative">
+      <!-- Línea de conexión horizontal -->
+      <div
+        class="hidden md:block absolute left-0 right-0 top-1/2 h-0.5 bg-gradient-to-r from-pink-600 via-pink-400 to-orange-600 dark:from-pink-500 dark:via-pink-300 dark:to-orange-500 -translate-y-1/2"
+      ></div>
+
+      <div class="grid grid-cols-1 md:grid-cols-4 gap-4">
+        <div *ngFor="let step of eventFlow" class="relative">
+          <!-- Step Card -->
+          <div class="card p-4 h-full">
+            <div class="flex flex-col items-center text-center">
+              <!-- Número con indicador de conexión -->
+              <div class="relative mb-4">
+                <div
+                  class="w-10 h-10 bg-gradient-to-br from-pink-600 to-orange-600 rounded-full flex items-center justify-center text-white font-bold text-lg shadow-lg"
+                >
+                  {{ step.number }}
+                </div>
+                <!-- Flecha móvil -->
+                <div
+                  *ngIf="step.number < eventFlow.length"
+                  class="hidden md:block absolute -right-5 top-1/2 text-pink-600 dark:text-pink-400"
+                >
+                  →
+                </div>
+              </div>
+
+              <!-- Icono y título -->
+              <div class="text-2xl mb-2">{{ step.icon }}</div>
+              <h4 class="font-bold text-gray-900 dark:text-white mb-2 text-sm">
+                {{ step.title }}
+              </h4>
+              <p class="text-gray-600 dark:text-gray-400 text-xs">
+                {{ step.description }}
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>

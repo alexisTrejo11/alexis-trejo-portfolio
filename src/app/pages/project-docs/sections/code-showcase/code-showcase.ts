@@ -1,5 +1,5 @@
-import { CommonModule } from '@angular/common';
-import { AfterViewInit, Component, ElementRef, ViewChild } from '@angular/core';
+import { CommonModule, isPlatformBrowser } from '@angular/common';
+import { AfterViewInit, Component, ElementRef, Inject, PLATFORM_ID, ViewChild } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 
 interface CodeExample {
@@ -31,6 +31,7 @@ import 'prismjs/components/prism-css'; // For CSS
 import 'prismjs/components/prism-scss'; // For SCSS
 import 'prismjs/components/prism-markup'; // For HTML/XML
 import 'prismjs/components/prism-bash'; // For Bash
+import { IconComponent } from '../../../../shared/components/icon/icon';
 
 // import 'prismjs/plugins/line-highlight/prism-line-highlight';
 // import 'prismjs/plugins/line-numbers/prism-line-numbers';
@@ -41,17 +42,16 @@ declare var Prism: any; // For TypeScript
 
 @Component({
   selector: 'app-code-showcase',
-  imports: [CommonModule],
+  imports: [CommonModule, IconComponent],
   templateUrl: './code-showcase.html',
 })
 export class CodeShowcase implements AfterViewInit {
   @ViewChild('codeBlock') codeBlock!: ElementRef;
 
-
-
   projectId: string = '';
   selectedExample: CodeExample | null = null;
   selectedFile: CodeFile | null = null;
+  isBrowser: boolean = false;
 
   // Placeholder for code examples data
   codeExamples: CodeExample[] = [
@@ -562,7 +562,7 @@ export class OrderService {
     'All',
     'ORM',
     'Database',
-    'Buisness Logic',
+    'Business Logic',
     'API',
     'Architecture',
     'Security',
@@ -571,9 +571,13 @@ export class OrderService {
 
   selectedCategory: string | null = 'All';
 
-  constructor(private route: ActivatedRoute) {}
+constructor(
+    private route: ActivatedRoute,
+    @Inject(PLATFORM_ID) private platformId: Object
+  ) {}
 
   ngOnInit() {
+    this.isBrowser = isPlatformBrowser(this.platformId);
     this.projectId = this.route.parent?.snapshot.params['projectId'] || '';
 
     if (this.codeExamples.length > 0) {
@@ -623,7 +627,11 @@ export class OrderService {
 
   // Prism.js highlighting after view init
   ngAfterViewInit() {
-    this.highlightCode();
+    if (this.isBrowser) {
+      setTimeout(() => {
+        this.highlightCode();
+      }, 100);
+    }
   }
 
   selectFile(file: CodeFile) {

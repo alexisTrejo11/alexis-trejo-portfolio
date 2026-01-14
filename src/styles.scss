@@ -6,7 +6,6 @@
 @tailwind components;
 @tailwind utilities;
 
-
 /* ============================================
    CUSTOM CSS VARIABLES & GRADIENTS
    ============================================ */
@@ -73,6 +72,12 @@
   pre {
     font-family: 'Fira Code', 'JetBrains Mono', 'Consolas', monospace;
   }
+
+  /* Smooth transitions para dark mode - Mejorado */
+  * {
+    transition: background-color 0.3s ease, border-color 0.3s ease, color 0.3s ease,
+      transform 0.3s ease, opacity 0.3s ease, box-shadow 0.3s ease;
+  }
 }
 
 @layer components {
@@ -86,7 +91,7 @@
   }
 
   .card-interactive {
-    @apply card-hover hover:scale-[1.02] cursor-pointer;
+    @apply card-hover hover:scale-[1.02] cursor-pointer active:scale-[0.98];
   }
 
   /* === BUTTONS === */
@@ -95,44 +100,44 @@
   }
 
   .btn-primary {
-    @apply btn bg-blue-600 hover:bg-blue-700 text-white hover:shadow-lg hover:scale-105 dark:bg-blue-700 dark:hover:bg-blue-800;
+    @apply btn bg-blue-600 hover:bg-blue-700 text-white hover:shadow-lg hover:scale-105 dark:bg-blue-700 dark:hover:bg-blue-800 active:scale-95;
   }
 
   .btn-secondary {
-    @apply btn border-2 border-gray-300 dark:border-gray-700 text-gray-700 dark:text-gray-300 hover:border-blue-600 dark:hover:border-blue-400 hover:text-blue-600 dark:hover:text-blue-400;
+    @apply btn border-2 border-gray-300 dark:border-gray-700 text-gray-700 dark:text-gray-300 hover:border-blue-600 dark:hover:border-blue-400 hover:text-blue-600 dark:hover:text-blue-400 active:scale-95;
   }
 
   .btn-ghost {
-    @apply btn text-gray-600 dark:text-gray-400 hover:bg-gray-100 dark:hover:bg-gray-800;
+    @apply btn text-gray-600 dark:text-gray-400 hover:bg-gray-100 dark:hover:bg-gray-800 active:scale-95;
   }
 
   .btn-icon {
-    @apply p-2 rounded-lg hover:bg-gray-100 dark:hover:bg-gray-800 transition-colors duration-200;
+    @apply p-2 rounded-lg hover:bg-gray-100 dark:hover:bg-gray-800 transition-colors duration-200 active:scale-95;
   }
 
   /* === BADGES === */
   .badge {
-    @apply inline-flex items-center px-3 py-1 rounded-full text-xs font-medium;
+    @apply inline-flex items-center px-3 py-1 rounded-full text-xs font-medium transition-all duration-200;
   }
 
   .badge-primary {
-    @apply badge bg-blue-100 text-blue-700 dark:bg-blue-900/30 dark:text-blue-400;
+    @apply badge bg-blue-100 text-blue-700 dark:bg-blue-900/30 dark:text-blue-400 hover:scale-105;
   }
 
   .badge-success {
-    @apply badge bg-green-100 text-green-700 dark:bg-green-900/30 dark:text-green-400;
+    @apply badge bg-green-100 text-green-700 dark:bg-green-900/30 dark:text-green-400 hover:scale-105;
   }
 
   .badge-warning {
-    @apply badge bg-yellow-100 text-yellow-700 dark:bg-yellow-900/30 dark:text-yellow-400;
+    @apply badge bg-yellow-100 text-yellow-700 dark:bg-yellow-900/30 dark:text-yellow-400 hover:scale-105;
   }
 
   .badge-error {
-    @apply badge bg-red-100 text-red-700 dark:bg-red-900/30 dark:text-red-400;
+    @apply badge bg-red-100 text-red-700 dark:bg-red-900/30 dark:text-red-400 hover:scale-105;
   }
 
   .badge-gray {
-    @apply badge bg-gray-100 text-gray-700 dark:bg-gray-800 dark:text-gray-300;
+    @apply badge bg-gray-100 text-gray-700 dark:bg-gray-800 dark:text-gray-300 hover:scale-105;
   }
 
   /* === INPUTS === */
@@ -142,7 +147,7 @@
 
   /* === TEXT UTILITIES === */
   .text-gradient {
-    @apply bg-clip-text text-transparent bg-gradient-to-r from-emerald-100 via-teal-400 to-indigo-600 dark:from-emerald-400  dark:to-indigo-700;
+    @apply bg-clip-text text-transparent bg-gradient-to-r from-emerald-100 via-teal-400 to-indigo-600 dark:from-emerald-400 dark:to-indigo-700;
   }
 
   /* === NAVIGATION === */
@@ -153,30 +158,61 @@
   .nav-link-active {
     @apply nav-link bg-blue-600 text-white dark:bg-blue-500;
   }
+
+  /* === SECTION TITLES === */
+  .section-title {
+    @apply text-4xl lg:text-5xl font-bold text-gray-900 dark:text-white mb-4;
+    background: var(--gradient-primary);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+  }
+
+  .section-subtitle {
+    @apply text-lg text-gray-600 dark:text-gray-400 max-w-3xl;
+  }
 }
 
 @layer utilities {
   /* === ANIMATIONS === */
   .animate-fade-in {
-    animation: fadeIn 0.3s ease-in-out;
+    animation: fadeIn 0.3s ease-in-out forwards;
   }
 
   .animate-slide-up {
-    animation: slideUp 0.4s ease-out;
+    animation: slideUp 0.4s ease-out forwards;
   }
 
   .animate-slide-down {
-    animation: slideDown 0.4s ease-out;
+    animation: slideDown 0.4s ease-out forwards;
   }
 
   .animate-scale-in {
-    animation: scaleIn 0.3s ease-out;
+    animation: scaleIn 0.3s ease-out forwards;
+  }
+
+  .animate-fade-in-up {
+    animation: fadeInUp 0.5s ease-out forwards;
+  }
+
+  .animate-pulse-slow {
+    animation: pulse 2s cubic-bezier(0.4, 0, 0.6, 1) infinite;
   }
 
   /* === CUSTOM UTILITIES === */
   .backdrop-blur-sm {
     backdrop-filter: blur(8px);
     -webkit-backdrop-filter: blur(8px);
+  }
+
+  .backdrop-blur-md {
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+  }
+
+  .backdrop-blur-lg {
+    backdrop-filter: blur(16px);
+    -webkit-backdrop-filter: blur(16px);
   }
 
   /* === GRADIENTS UTILITIES === */
@@ -226,7 +262,7 @@
   .btn-gradient-primary {
     background: var(--gradient-primary);
     color: white;
-    @apply px-6 py-3 font-medium rounded-lg transition-all duration-300 hover:shadow-xl hover:scale-105;
+    @apply px-6 py-3 font-medium rounded-lg transition-all duration-300 hover:shadow-xl hover:scale-105 active:scale-95;
   }
 
   .dark .btn-gradient-primary {
@@ -255,6 +291,115 @@
 
   .bg-gradient-brand-subtle {
     @apply bg-gradient-to-br from-emerald-100 via-teal-100 to-indigo-100 dark:from-emerald-900/30 dark:via-teal-900/30 dark:to-indigo-900/30;
+  }
+
+  /* === LINE CLAMPING === */
+  .line-clamp-1 {
+    overflow: hidden;
+    display: -webkit-box;
+    -webkit-box-orient: vertical;
+    -webkit-line-clamp: 1;
+  }
+
+  .line-clamp-2 {
+    overflow: hidden;
+    display: -webkit-box;
+    -webkit-box-orient: vertical;
+    -webkit-line-clamp: 2;
+  }
+
+  .line-clamp-3 {
+    overflow: hidden;
+    display: -webkit-box;
+    -webkit-box-orient: vertical;
+    -webkit-line-clamp: 3;
+  }
+
+  .line-clamp-4 {
+    overflow: hidden;
+    display: -webkit-box;
+    -webkit-box-orient: vertical;
+    -webkit-line-clamp: 4;
+  }
+
+  /* === TRANSFORM UTILITIES === */
+  .rotate-180 {
+    transform: rotate(180deg);
+  }
+
+  .rotate-90 {
+    transform: rotate(90deg);
+  }
+
+  .-rotate-90 {
+    transform: rotate(-90deg);
+  }
+
+  /* === HOVER EFFECTS === */
+  .hover-lift {
+    @apply transition-transform duration-300;
+  }
+
+  .hover-lift:hover {
+    transform: translateY(-4px);
+  }
+
+  .hover-glow {
+    @apply transition-shadow duration-300;
+  }
+
+  .hover-glow:hover {
+    box-shadow: 0 10px 30px -10px rgba(16, 185, 129, 0.3);
+  }
+
+  /* === STAGGERED ANIMATIONS === */
+  .stagger-item {
+    animation: fadeInUp 0.5s ease-out forwards;
+    opacity: 0;
+  }
+
+  /* === GRID PATTERNS === */
+  .grid-pattern {
+    background-image: linear-gradient(rgba(0, 0, 0, 0.1) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(0, 0, 0, 0.1) 1px, transparent 1px);
+    background-size: 20px 20px;
+  }
+
+  .dark .grid-pattern {
+    background-image: linear-gradient(rgba(255, 255, 255, 0.05) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(255, 255, 255, 0.05) 1px, transparent 1px);
+  }
+
+  /* === GLASS MORPHISM === */
+  .glass {
+    background: rgba(255, 255, 255, 0.1);
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+  }
+
+  .dark .glass {
+    background: rgba(0, 0, 0, 0.2);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+  }
+
+  /* === SCROLLBAR HIDING === */
+  .scrollbar-hide {
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+  }
+
+  .scrollbar-hide::-webkit-scrollbar {
+    display: none;
+  }
+
+  /* === ASPECT RATIOS === */
+  .aspect-video {
+    aspect-ratio: 16 / 9;
+  }
+
+  .aspect-square {
+    aspect-ratio: 1 / 1;
   }
 }
 
@@ -316,59 +461,82 @@
   }
 }
 
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes pulse {
+  0%,
+  100% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0.7;
+  }
+}
+
+@keyframes shimmer {
+  0% {
+    background-position: -1000px 0;
+  }
+  100% {
+    background-position: 1000px 0;
+  }
+}
+
 /* ============================================
    GLOBAL STYLES
    ============================================ */
 
-/* Custom Scrollbar */
+/* Custom Scrollbar - Mejorado */
 ::-webkit-scrollbar {
-  width: 10px;
-  height: 10px;
+  width: 12px;
+  height: 12px;
 }
 
 ::-webkit-scrollbar-track {
-  background: #f1f1f1;
+  @apply bg-gray-100 dark:bg-gray-900 rounded-full;
 }
 
 .dark ::-webkit-scrollbar-track {
-  background: #1f2937;
+  @apply bg-gray-900;
 }
 
 ::-webkit-scrollbar-thumb {
-  background: #888;
-  border-radius: 5px;
+  @apply bg-gradient-to-b from-emerald-500 to-indigo-600 rounded-full;
 }
 
 .dark ::-webkit-scrollbar-thumb {
-  background: #4b5563;
+  @apply bg-gradient-to-b from-emerald-600 to-indigo-700;
 }
 
 ::-webkit-scrollbar-thumb:hover {
-  background: #555;
+  @apply from-emerald-600 to-indigo-700;
 }
 
 .dark ::-webkit-scrollbar-thumb:hover {
-  background: #6b7280;
+  @apply from-emerald-700 to-indigo-800;
 }
 
-/* Selection */
+/* Selection - Mejorado */
 ::selection {
-  background-color: #3b82f6;
-  color: white;
+  @apply bg-gradient-to-r from-emerald-500/50 to-indigo-600/50 text-white;
 }
 
 .dark ::selection {
-  background-color: #60a5fa;
+  @apply bg-gradient-to-r from-emerald-600/50 to-indigo-700/50;
 }
 
-/* Focus styles */
+/* Focus styles - Mejorado */
 *:focus-visible {
-  outline: 2px solid #3b82f6;
-  outline-offset: 2px;
-}
-
-.dark *:focus-visible {
-  outline-color: #60a5fa;
+  @apply outline-none ring-2 ring-blue-500 ring-offset-2 dark:ring-offset-gray-950;
 }
 
 /* Logo Gradient */
@@ -378,12 +546,98 @@
   animation: gradient-shift 3s ease infinite;
 }
 
-/* Smooth transitions para dark mode */
-* {
-  transition: background-color 0.3s ease, border-color 0.3s ease, color 0.3s ease;
+/* Smooth transitions para dark mode - Ya movido a @layer base */
+
+/* Phosphor Icons base styles */
+.ph {
+  display: inline-block;
+  vertical-align: middle;
 }
 
+/* Responsive text sizes */
+.text-responsive-xs {
+  @apply text-xs sm:text-sm;
+}
 
+.text-responsive-sm {
+  @apply text-sm sm:text-base;
+}
+
+.text-responsive-base {
+  @apply text-base sm:text-lg;
+}
+
+.text-responsive-lg {
+  @apply text-lg sm:text-xl;
+}
+
+.text-responsive-xl {
+  @apply text-xl sm:text-2xl;
+}
+
+/* Responsive padding */
+.p-responsive {
+  @apply px-4 sm:px-6 lg:px-8;
+}
+
+/* Grid gaps responsive */
+.gap-responsive {
+  @apply gap-4 sm:gap-6 lg:gap-8;
+}
+
+/* ============================================
+   PRINT STYLES
+   ============================================ */
+@media print {
+  .no-print {
+    display: none !important;
+  }
+
+  .print-only {
+    display: block !important;
+  }
+
+  .card {
+    break-inside: avoid;
+    box-shadow: none !important;
+    border: 1px solid #e5e7eb !important;
+  }
+
+  .btn,
+  .btn-primary,
+  .btn-secondary,
+  .btn-gradient-primary {
+    display: none !important;
+  }
+
+  .badge {
+    border: 1px solid currentColor !important;
+    background: transparent !important;
+  }
+}
+
+/* ============================================
+   HIGH CONTRAST MODE
+   ============================================ */
+@media (prefers-contrast: high) {
+  :root {
+    --color-emerald: #059669;
+    --color-teal: #0f766e;
+    --color-indigo: #3730a3;
+  }
+
+  .card {
+    border-width: 2px;
+  }
+
+  .btn {
+    border-width: 2px;
+  }
+}
+
+/* ============================================
+   PRISM.JS IMPORTS
+   ============================================ */
 
 @import 'prismjs/themes/prism-tomorrow.css';
 /* @import 'prismjs/themes/prism-okaidia.css'; */
@@ -392,6 +646,5 @@
 @import 'prismjs/plugins/line-highlight/prism-line-highlight.css';
 @import 'prismjs/plugins/line-numbers/prism-line-numbers.css';
 @import 'prismjs/plugins/toolbar/prism-toolbar.css';
-
 
 @import './prism/prism-custom.scss';
